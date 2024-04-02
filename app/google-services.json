@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "559438765126",
+    "firebase_url": "https://finalexam-d6a53-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "finalexam-d6a53",
+    "storage_bucket": "finalexam-d6a53.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559438765126:android:f55043195a412b1e41fe47",
+        "android_client_info": {
+          "package_name": "com.example.finalexam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDft7FKPc4BVoglO52in6YidR4Bvj71sUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
