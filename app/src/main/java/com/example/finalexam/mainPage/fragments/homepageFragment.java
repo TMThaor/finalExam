@@ -60,9 +60,9 @@ public class homepageFragment extends Fragment implements jobAdapter.OnJobClickL
         Job job2 = new Job("124", "XYZ Corporation", "Data Analyst", "Part-time", "456 Elm St", "2 years", "Bachelor", "Description", 4000.0,"null","null","null");
         Job job3 = new Job("125", "123 Enterprises", "Project Manager", "Full-time", "789 Oak St", "5 years", "Master", "Description", 6000.0,"null","null","null");
 
-        jobsRef.child("job1").setValue(job1);
-        jobsRef.child("job2").setValue(job2);
-        jobsRef.child("job3").setValue(job3);
+        jobsRef.child(job1.getJobId()).setValue(job1);
+        jobsRef.child(job2.getJobId()).setValue(job2);
+        jobsRef.child(job3.getJobId()).setValue(job3);
     }
 
     private void initData() {
@@ -72,7 +72,7 @@ public class homepageFragment extends Fragment implements jobAdapter.OnJobClickL
             public void onDataChange(DataSnapshot dataSnapshot) {
                 List<Job> jobs = new ArrayList<>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String jobId = snapshot.child("jobid").getValue(String.class);
+                    String jobId = snapshot.child("jobId").getValue(String.class);
                     String title = snapshot.child("title").getValue(String.class);
                     String company = snapshot.child("company").getValue(String.class);
                     Job job = new Job(); // Sử dụng constructor mặc định

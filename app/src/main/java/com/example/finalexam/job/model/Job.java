@@ -78,7 +78,7 @@ public class Job {
     }
 
     public String getRole() {
-        return role;
+            return role;
     }
 
     public void setRole(String role) {
@@ -89,7 +89,7 @@ public class Job {
         return description;
     }
 
-    public void setDescription(String des) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
