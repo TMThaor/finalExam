@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -46,15 +47,15 @@ public class JobDetail extends AppCompatActivity {
             jobIdTextView.setText("JobID: " + jobId);
             jobTitleTextView.setText("Title: " + jobTitle);
             jobCompanyTextView.setText("Company: " + jobCompany);
-
-            DatabaseReference jobRef = FirebaseDatabase.getInstance().getReference("jobs");
-            jobRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                            Job job = dataSnapshot.getValue(Job.class);
+            if(jobId!=null){
+                DatabaseReference jobRef = FirebaseDatabase.getInstance().getReference("jobs").child(jobId);
+                jobRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            Job job = snapshot.getValue(Job.class);
                             if (job != null) {
+                                // Hiển thị thông tin công việc trên giao diện
                                 jobOppTextView.setText("Opportunity: " + job.getOpp());
                                 jobAddressTextView.setText("Address: " + job.getShortAddress());
                                 jobExpTextView.setText("Experience: " + job.getExp());
@@ -62,15 +63,15 @@ public class JobDetail extends AppCompatActivity {
                                 jobDesTextView.setText("Description: " + job.getDescription());
                                 jobSalaryTextView.setText("Salary: " + String.valueOf(job.getSalary()));
                             }
+                        } else {
                         }
-                    } else {
                     }
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                }
-            });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+            }
         }
 
         applyButton.setOnClickListener(new View.OnClickListener() {
