@@ -20,6 +20,25 @@ public class user {
 
     public user() {
     }
+    public user(String userId) {
+        this.userId=userId;
+        this.name = null;
+        this.role = null;
+        this.phoneNumber = null;
+        this.email = null;
+        this.address = null;
+        this.gender = null;
+        this.DOB = null;
+        this.education = null;
+        this.jobExperiment = null;
+        this.degree = null;
+        this.skills = null;
+        this.careerGoals = null;
+        this.socialActivities = null;
+        this.hobbies = null;
+        this.achievement = null;
+        this.moreInfo = null;
+    }
 
     public user(String userId, String name, String role, String phoneNumber, String email, String address,
                 String gender, String DOB, ArrayList<String> education, ArrayList<String> jobExperiment,

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -14,11 +15,14 @@ import com.example.finalexam.databinding.ActivityMainPageBinding;
 import com.example.finalexam.mainPage.fragments.AccountFragment;
 import com.example.finalexam.mainPage.fragments.CVfragment;
 import com.example.finalexam.mainPage.fragments.homepageFragment;
+import com.example.finalexam.user.model.user;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainPage extends AppCompatActivity {
 
     ActivityMainPageBinding binding;
+    user currentUser;
+    public static String  id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,8 @@ public class MainPage extends AppCompatActivity {
         binding=ActivityMainPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         replaceFragment(new homepageFragment());
+        Intent intent =getIntent();
+        id=intent.getStringExtra("userId");
 
         binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
