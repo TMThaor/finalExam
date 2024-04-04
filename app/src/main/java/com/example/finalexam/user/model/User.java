@@ -2,7 +2,7 @@ package com.example.finalexam.user.model;
 
 import java.util.ArrayList;
 
-public class user {
+public class User {
     private String userId;
 
     //thông tin liên hệ
@@ -18,9 +18,9 @@ public class user {
     private ArrayList<String> achievement;
     private String moreInfo;
 
-    public user() {
+    public User() {
     }
-    public user(String userId) {
+    public User(String userId) {
         this.userId=userId;
         this.name = null;
         this.role = null;
@@ -40,7 +40,7 @@ public class user {
         this.moreInfo = null;
     }
 
-    public user(String userId, String name, String role, String phoneNumber, String email, String address,
+    public User(String userId, String name, String role, String phoneNumber, String email, String address,
                 String gender, String DOB, ArrayList<String> education, ArrayList<String> jobExperiment,
                 ArrayList<String> degree, ArrayList<String> skills, String careerGoals, String socialActivities,
                 ArrayList<String> hobbies, ArrayList<String> achievement, String moreInfo)

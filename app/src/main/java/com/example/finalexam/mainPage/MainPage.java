@@ -15,14 +15,18 @@ import com.example.finalexam.databinding.ActivityMainPageBinding;
 import com.example.finalexam.mainPage.fragments.AccountFragment;
 import com.example.finalexam.mainPage.fragments.CVfragment;
 import com.example.finalexam.mainPage.fragments.homepageFragment;
-import com.example.finalexam.user.model.user;
+import com.example.finalexam.user.model.User;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainPage extends AppCompatActivity {
 
     ActivityMainPageBinding binding;
-    user currentUser;
+    User currentUser;
     public static String  id;
+
+    public static String getId() {
+        return id;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

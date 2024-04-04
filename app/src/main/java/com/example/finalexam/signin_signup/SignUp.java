@@ -11,9 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.finalexam.R;
 import com.example.finalexam.databinding.ActivitySignUpBinding;
-import com.example.finalexam.user.model.user;
+import com.example.finalexam.user.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -92,7 +91,7 @@ public class SignUp extends AppCompatActivity {
                     Toast.makeText(SignUp.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                 //tạo user
                     DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
-                    user u=new user(mAuth.getUid().toString());
+                    User u=new User(mAuth.getUid().toString());
                     usersRef.child(mAuth.getUid().toString()).setValue(u);
                     setNull();
                 }
