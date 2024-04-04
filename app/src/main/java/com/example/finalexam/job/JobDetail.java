@@ -56,10 +56,10 @@ public class JobDetail extends AppCompatActivity {
                             Job job = dataSnapshot.getValue(Job.class);
                             if (job != null) {
                                 jobOppTextView.setText("Opportunity: " + job.getOpp());
-                                jobAddressTextView.setText("Address: " + job.getAddress());
+                                jobAddressTextView.setText("Address: " + job.getShortAddress());
                                 jobExpTextView.setText("Experience: " + job.getExp());
-                                jobDegreeTextView.setText("Degree: " + job.getDegree());
-                                jobDesTextView.setText("Description: " + job.getDes());
+                                jobDegreeTextView.setText("Role: " + job.getRole());
+                                jobDesTextView.setText("Description: " + job.getDescription());
                                 jobSalaryTextView.setText("Salary: " + String.valueOf(job.getSalary()));
                             }
                         }

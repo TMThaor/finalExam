@@ -1,29 +1,40 @@
 package com.example.finalexam.job.model;
 
 public class Job {
-    String jobid, company, title, opp, address, exp, degree, des;
+    String jobId;
+
+    //Thông tin vắn tắt
+    String  company, title, opp, shortAddress, exp, role;
+
+    //Thông tin chi tiết
+    String description,requirement,benefit,address;
+    //opp: hình thức tuyển dụng (partime, fulltime, intern)
     double salary;
 
     public Job() {
     }
-    public Job(String jobid, String company, String title, String opp, String address, String exp, String degree, String des, double salary) {
-        this.jobid = jobid;
+
+    public Job(String jobId, String company, String title, String opp, String shortAddress, String exp, String role, String description, double salary, String requirement, String benefit, String address) {
+        this.jobId = jobId;
         this.company = company;
         this.title = title;
         this.opp = opp;
-        this.address = address;
+        this.shortAddress = shortAddress;
         this.exp = exp;
-        this.degree = degree;
-        this.des = des;
+        this.role = role;
+        this.description = description;
+        this.requirement = requirement;
+        this.benefit = benefit;
+        this.address = address;
         this.salary = salary;
     }
 
-    public String getJobid() {
-        return jobid;
+    public String getJobId() {
+        return jobId;
     }
 
-    public void setJobid(String jobid) {
-        this.jobid = jobid;
+    public void setJobId(String jobId) {
+        this.jobId = jobId;
     }
 
     public String getCompany() {
@@ -50,12 +61,12 @@ public class Job {
         this.opp = opp;
     }
 
-    public String getAddress() {
-        return address;
+    public String getShortAddress() {
+        return shortAddress;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setShortAddress(String shortAddress) {
+        this.shortAddress = shortAddress;
     }
 
     public String getExp() {
@@ -66,20 +77,20 @@ public class Job {
         this.exp = exp;
     }
 
-    public String getDegree() {
-        return degree;
+    public String getRole() {
+        return role;
     }
 
-    public void setDegree(String degree) {
-        this.degree = degree;
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    public String getDes() {
-        return des;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDes(String des) {
-        this.des = des;
+    public void setDescription(String des) {
+        this.description = description;
     }
 
     public double getSalary() {
@@ -88,5 +99,29 @@ public class Job {
 
     public void setSalary(double salary) {
         this.salary = salary;
+    }
+
+    public String getRequirement() {
+        return requirement;
+    }
+
+    public void setRequirement(String requirement) {
+        this.requirement = requirement;
+    }
+
+    public String getBenefit() {
+        return benefit;
+    }
+
+    public void setBenefit(String benefit) {
+        this.benefit = benefit;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

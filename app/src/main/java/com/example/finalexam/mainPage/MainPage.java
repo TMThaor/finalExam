@@ -47,4 +47,11 @@ public class MainPage extends AppCompatActivity {
         fragmentTransaction.replace(R.id.displayPlace,fragment);
         fragmentTransaction.commit();
     }
+    private void addFragment(Fragment fragment){
+        FragmentManager fragmentManager=getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.displayPlace,fragment);
+        fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
+        fragmentTransaction.commit();
+    }
 }
