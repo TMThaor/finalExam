@@ -52,7 +52,7 @@ public class SignIn extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email=edtEmail.getText().toString(),pass=edtPassword.getText().toString();
+                String email=edtEmail.getText().toString().trim(),pass=edtPassword.getText().toString().trim();
                 if(!checkNull()){
                     mAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -61,6 +61,7 @@ public class SignIn extends AppCompatActivity {
                                 String userId=mAuth.getUid().toString();
                                 Intent intent=new Intent(SignIn.this, MainPage.class);
                                 intent.putExtra("userId",userId);
+                                finish();
                                 startActivity(intent);
 
                             }

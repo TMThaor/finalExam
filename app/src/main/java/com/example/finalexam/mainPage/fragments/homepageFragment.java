@@ -30,7 +30,7 @@ import java.util.List;
 public class homepageFragment extends Fragment implements jobAdapter.OnJobClickListener{
 
     private RecyclerView recyclerView;
-    private List<Job> jobList;
+    private ArrayList<Job> jobList;
     private jobAdapter adapter;
     private TextView tv;
 
@@ -58,24 +58,25 @@ public class homepageFragment extends Fragment implements jobAdapter.OnJobClickL
         initData();
         return view;
     }
-    private void initJobs() {
-        DatabaseReference jobsRef = FirebaseDatabase.getInstance().getReference("jobs");
-        //Demo
-        Job job1 = new Job("123", "ABC Company", "Software Engineer", "Full-time", "123 Main St", "3 years", "Bachelor", "Description", 5000.0,"null","null","null");
-        Job job2 = new Job("124", "XYZ Corporation", "Data Analyst", "Part-time", "456 Elm St", "2 years", "Bachelor", "Description", 4000.0,"null","null","null");
-        Job job3 = new Job("125", "123 Enterprises", "Project Manager", "Full-time", "789 Oak St", "5 years", "Master", "Description", 6000.0,"null","null","null");
 
-        jobsRef.child(job1.getJobId()).setValue(job1);
-        jobsRef.child(job2.getJobId()).setValue(job2);
-        jobsRef.child(job3.getJobId()).setValue(job3);
-    }
+//    private void initJobs() {
+//        DatabaseReference jobsRef = FirebaseDatabase.getInstance().getReference("jobs");
+//        //Demo
+//        Job job1 = new Job("123", "ABC Company", "Software Engineer", "Full-time", "123 Main St", "3 years", "Bachelor", "Description", 5000.0,"null","null","null");
+//        Job job2 = new Job("124", "XYZ Corporation", "Data Analyst", "Part-time", "456 Elm St", "2 years", "Bachelor", "Description", 4000.0,"null","null","null");
+//        Job job3 = new Job("125", "123 Enterprises", "Project Manager", "Full-time", "789 Oak St", "5 years", "Master", "Description", 6000.0,"null","null","null");
+//
+//        jobsRef.child(job1.getJobId()).setValue(job1);
+//        jobsRef.child(job2.getJobId()).setValue(job2);
+//        jobsRef.child(job3.getJobId()).setValue(job3);
+//    }
 
     private void initData() {
         DatabaseReference jobsRef = FirebaseDatabase.getInstance().getReference("jobs");
         jobsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                List<Job> jobs = new ArrayList<>();
+                jobList = new ArrayList<>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String jobId = snapshot.child("jobId").getValue(String.class);
                     String title = snapshot.child("title").getValue(String.class);
@@ -84,10 +85,10 @@ public class homepageFragment extends Fragment implements jobAdapter.OnJobClickL
                     job.setJobId(jobId);
                     job.setTitle(title);
                     job.setCompany(company);
-                    jobs.add(job);
+                    jobList.add(job);
                 }
                 // Cập nhật adapter của RecyclerView với danh sách mới
-                adapter.setJobs(jobs);
+                adapter.setJobs(jobList);
             }
 
             @Override
