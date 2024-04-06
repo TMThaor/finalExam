@@ -39,7 +39,7 @@ public class CVfragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_c_vfragment, container, false);
         createCVButton = view.findViewById(R.id.create_cv_button);
         // Nhận userId từ MainPage
-        userId = ((MainPage) requireActivity()).getId();
+        userId = ((MainPage)requireActivity()).getId();
 
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("CV").child(userId);
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -47,6 +47,7 @@ public class CVfragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     //Người dùng đã có CV
+                    openCVDetailFragment();
                 }else{
                     //Người dùng chưa có CV
                     createCVButton.setVisibility(View.VISIBLE);
@@ -68,6 +69,15 @@ public class CVfragment extends Fragment {
         });
 
         return view;
+    }
+    private void openCVDetailFragment() {
+        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        CVDetailFragment cvDetailFragment = new CVDetailFragment();
+        cvDetailFragment.setUserId(userId);
+        fragmentTransaction.replace(R.id.fragment_container, cvDetailFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
     private void openCVFormFragment() {
         FragmentManager fragmentManager = getParentFragmentManager();

@@ -1,14 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".mainPage.fragments.AccountFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- Danh sách công việc đã ứng tuyển -->
     <TextView
+        android:id="@+id/text_applied_jobs"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="this is account fragment" />
+        android:layout_height="wrap_content"
+        android:text="Danh sách công việc đã ứng tuyển"
+        android:editable="false"
+        android:textSize="20sp"
+        android:padding="16dp"
+        android:background="#CCCCCC"/>
 
-</FrameLayout>
+    <!-- Button Đăng xuất -->
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Đăng xuất" />
+
+</LinearLayout>
