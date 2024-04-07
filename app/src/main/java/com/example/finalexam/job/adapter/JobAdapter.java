@@ -13,12 +13,12 @@ import com.example.finalexam.job.model.Job;
 
 import java.util.List;
 
-public class jobAdapter extends RecyclerView.Adapter<jobAdapter.ViewHolder> {
+public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder> {
 
     private List<Job> jobs;
     private OnJobClickListener onJobClickListener;
 
-    public jobAdapter(List<Job> jobs, OnJobClickListener listener) {
+    public JobAdapter(List<Job> jobs, OnJobClickListener listener) {
         this.jobs = jobs;
         this.onJobClickListener = listener;
     }

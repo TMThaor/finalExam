@@ -10,13 +10,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.finalexam.R;
 import com.example.finalexam.job.JobDetail;
-import com.example.finalexam.job.adapter.jobAdapter;
+import com.example.finalexam.job.adapter.JobAdapter;
 import com.example.finalexam.job.model.Job;
+import com.example.finalexam.job.model.JobRepository;
 import com.example.finalexam.mainPage.MainPage;
+import com.example.finalexam.mainPage.Search;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,15 +27,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
-public class homepageFragment extends Fragment implements jobAdapter.OnJobClickListener{
+public class homepageFragment extends Fragment implements JobAdapter.OnJobClickListener{
 
+    private JobRepository jobRepository;
     private RecyclerView recyclerView;
     private ArrayList<Job> jobList;
-    private jobAdapter adapter;
-    private TextView tv;
+    private JobAdapter adapter;
+    private EditText searchBar;
 
 
     @Override
@@ -45,17 +48,26 @@ public class homepageFragment extends Fragment implements jobAdapter.OnJobClickL
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_homepage, container, false);
-        recyclerView = view.findViewById(R.id.recycler_view);
-        tv=view.findViewById(R.id.uid);
-        tv.setText(MainPage.id);
-
+        recyclerView = view.findViewById(R.id.rvJob);
+        searchBar=view.findViewById(R.id.search_bar);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         jobList = new ArrayList<>();
 
-        adapter = new jobAdapter(jobList, this);
-        recyclerView.setAdapter(adapter);
+
 //        initJobs();
         initData();
+        adapter = new JobAdapter(jobList, this);
+        recyclerView.setAdapter(adapter);
+//        System.out.println(jobRepository);
+//        adapter.setJobs(jobRepository.getJobList());
+
+        searchBar.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                Intent intent =new Intent(requireContext(), Search.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 

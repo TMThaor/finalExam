@@ -1,19 +1,17 @@
 package com.example.finalexam.job.model;
 
-import org.checkerframework.checker.units.qual.A;
-
 import java.util.ArrayList;
 
-public class jobRepository {
+public class JobRepository {
     private static ArrayList<Job> jobList;
 
-    public jobRepository(ArrayList<Job> jobList){
+    public JobRepository(ArrayList<Job> jobList){
         for(Job job:jobList){
             this.jobList.add(job);
         }
     }
 
-    public jobRepository() {
+    public JobRepository() {
     }
 
     public static ArrayList<Job> getJobList(){
@@ -21,11 +19,19 @@ public class jobRepository {
     }
 
     public static void setJobList(ArrayList<Job> jobList){
-        jobRepository.jobList=jobList;
+        JobRepository.jobList=jobList;
     }
 
     public void addJob(Job job){
         this.jobList.add(job);
+    }
+
+    public Job getJobById(String id){
+        for ( Job j : jobList) {
+            if (id == j.getJobId())
+                return j;
+        }
+        return  null;
     }
 
     public ArrayList<Job> filterByTitle(String key){

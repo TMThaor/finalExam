@@ -3,19 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".mainPage.fragments.homepageFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_margin="5dp">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/uid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="UID:"
-        android:layout_marginBottom="30dp"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <EditText
+        android:id="@+id/search_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="@drawable/custom_search_view"
+        android:layout_margin="10dp"
+        android:hint="  Search ...."
+        android:drawableLeft="@drawable/search"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvJob"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
 </LinearLayout>
