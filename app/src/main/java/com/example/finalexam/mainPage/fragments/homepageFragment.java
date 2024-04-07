@@ -31,7 +31,11 @@ import java.util.ArrayList;
 
 public class homepageFragment extends Fragment implements JobAdapter.OnJobClickListener{
 
+
     private JobRepository jobRepository;
+
+    private String userId;
+
     private RecyclerView recyclerView;
     private ArrayList<Job> jobList;
     private JobAdapter adapter;
@@ -115,6 +119,8 @@ public class homepageFragment extends Fragment implements JobAdapter.OnJobClickL
         intent.putExtra("job_id", job.getJobId());
         intent.putExtra("job_title", job.getTitle());
         intent.putExtra("job_company", job.getCompany());
+        userId =((MainPage)requireActivity()).getId();
+        intent.putExtra("user_id", userId);
         startActivity(intent);
     }
 }
