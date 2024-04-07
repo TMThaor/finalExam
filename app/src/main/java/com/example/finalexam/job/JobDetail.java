@@ -44,38 +44,17 @@ public class JobDetail extends AppCompatActivity {
         //Demo
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            String jobId = extras.getString("job_id");
-            String jobTitle = extras.getString("job_title");
-            String jobCompany = extras.getString("job_company");
+            Job job=(Job) extras.get("object_job");
 
-            jobIdTextView.setText("JobID: " + jobId);
-            jobTitleTextView.setText("Title: " + jobTitle);
-            jobCompanyTextView.setText("Company: " + jobCompany);
-            if(jobId!=null){
-                DatabaseReference jobRef = FirebaseDatabase.getInstance().getReference("jobs").child(jobId);
-                jobRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()) {
-                            Job job = snapshot.getValue(Job.class);
-                            if (job != null) {
-                                // Hiển thị thông tin công việc trên giao diện
-                                jobOppTextView.setText("Opportunity: " + job.getOpp());
-                                jobAddressTextView.setText("Address: " + job.getShortAddress());
-                                jobExpTextView.setText("Experience: " + job.getExp());
-                                jobDegreeTextView.setText("Role: " + job.getRole());
-                                jobDesTextView.setText("Description: " + job.getDescription());
-                                jobSalaryTextView.setText("Salary: " + String.valueOf(job.getSalary()));
-                            }
-                        } else {
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
-            }
+            jobIdTextView.setText("JobID: " + job.getJobId());
+            jobTitleTextView.setText("Title: " + job.getTitle());
+            jobCompanyTextView.setText("Company: " + job.getCompany());
+            jobOppTextView.setText("Opportunity: " + job.getOpp());
+            jobAddressTextView.setText("Address: " + job.getShortAddress());
+            jobExpTextView.setText("Experience: " + job.getExp());
+            jobDegreeTextView.setText("Role: " + job.getRole());
+            jobDesTextView.setText("Description: " + job.getDescription());
+            jobSalaryTextView.setText("Salary: " + String.valueOf(job.getSalary()));
         }
         applyButton.setOnClickListener(new View.OnClickListener() {
             @Override

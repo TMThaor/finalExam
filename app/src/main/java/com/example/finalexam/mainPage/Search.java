@@ -18,10 +18,11 @@ import com.example.finalexam.databinding.ActivitySearchBinding;
 import com.example.finalexam.job.JobDetail;
 import com.example.finalexam.job.adapter.JobAdapter;
 import com.example.finalexam.job.model.Job;
+import com.example.finalexam.my_interface.IClickItemJobListener;
 
 import java.util.ArrayList;
 
-public class Search extends AppCompatActivity implements JobAdapter.OnJobClickListener {
+public class Search extends AppCompatActivity {
     ActivitySearchBinding binding;
     private Button btnBack;
     ArrayList<Job> jobList,searchList;
@@ -44,7 +45,12 @@ public class Search extends AppCompatActivity implements JobAdapter.OnJobClickLi
         jobList= (ArrayList<Job>) b.get("jobList");
         rvSearchList.setLayoutManager(new LinearLayoutManager(this));
 
-        mAdapter=new JobAdapter(new ArrayList<>(),  this);
+        mAdapter=new JobAdapter(new ArrayList<>(), new IClickItemJobListener() {
+            @Override
+            public void onClickItemJob(Job job) {
+                goToDetail(job);
+            }
+        });
         rvSearchList.setAdapter(mAdapter);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +62,7 @@ public class Search extends AppCompatActivity implements JobAdapter.OnJobClickLi
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                filter(query);
+                    filter(query);
                 return true;
             }
 
@@ -76,16 +82,13 @@ public class Search extends AppCompatActivity implements JobAdapter.OnJobClickLi
         }
         mAdapter.setJobs(a);
     }
-
-
-    @Override
-    public void onJobClick(Job job) {
-        Intent intent = new Intent(Search.this, JobDetail.class);
-        intent.putExtra("job_id", job.getJobId());
-        intent.putExtra("job_title", job.getTitle());
-        intent.putExtra("job_company", job.getCompany());
-        userId =MainPage.getId();
-        intent.putExtra("user_id", userId);
+    public void goToDetail(Job job) {
+        Intent intent = new Intent(this, JobDetail.class);
+        Bundle bundle=new Bundle();
+        bundle.putSerializable("object_job",job);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
+
+
 }

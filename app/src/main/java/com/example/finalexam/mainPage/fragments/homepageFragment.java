@@ -19,6 +19,7 @@ import com.example.finalexam.job.adapter.JobAdapter;
 import com.example.finalexam.job.model.Job;
 import com.example.finalexam.mainPage.MainPage;
 import com.example.finalexam.mainPage.Search;
+import com.example.finalexam.my_interface.IClickItemJobListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,12 +29,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-public class homepageFragment extends Fragment implements JobAdapter.OnJobClickListener{
-
-
+public class homepageFragment extends Fragment{
 
     private String userId;
-
     private RecyclerView recyclerView;
     private ArrayList<Job> jobList;
     private JobAdapter adapter;
@@ -58,10 +56,13 @@ public class homepageFragment extends Fragment implements JobAdapter.OnJobClickL
 
 //        initJobs();
         initData();
-        adapter = new JobAdapter(jobList, this);
+        adapter = new JobAdapter(jobList, new IClickItemJobListener() {
+            @Override
+            public void onClickItemJob(Job job) {
+                goToDetail(job);
+            }
+        });
         recyclerView.setAdapter(adapter);
-//        System.out.println(jobRepository);
-//        adapter.setJobs(jobRepository.getJobList());
 
         searchBar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,13 +96,7 @@ public class homepageFragment extends Fragment implements JobAdapter.OnJobClickL
             public void onDataChange(DataSnapshot dataSnapshot) {
                 jobList = new ArrayList<>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String jobId = snapshot.child("jobId").getValue(String.class);
-                    String title = snapshot.child("title").getValue(String.class);
-                    String company = snapshot.child("company").getValue(String.class);
-                    Job job = new Job(); // Sử dụng constructor mặc định
-                    job.setJobId(jobId);
-                    job.setTitle(title);
-                    job.setCompany(company);
+                    Job job= snapshot.getValue(Job.class);
                     jobList.add(job);
                 }
                 // Cập nhật adapter của RecyclerView với danh sách mới
@@ -114,14 +109,11 @@ public class homepageFragment extends Fragment implements JobAdapter.OnJobClickL
         });
     }
 
-    @Override
-    public void onJobClick(Job job) {
+    public void goToDetail(Job job) {
         Intent intent = new Intent(requireContext(), JobDetail.class);
-        intent.putExtra("job_id", job.getJobId());
-        intent.putExtra("job_title", job.getTitle());
-        intent.putExtra("job_company", job.getCompany());
-        userId =((MainPage)requireActivity()).getId();
-        intent.putExtra("user_id", userId);
+        Bundle bundle=new Bundle();
+        bundle.putSerializable("object_job",job);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 }

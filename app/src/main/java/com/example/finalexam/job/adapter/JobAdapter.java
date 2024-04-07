@@ -1,8 +1,11 @@
 package com.example.finalexam.job.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,84 +13,84 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalexam.R;
 import com.example.finalexam.job.model.Job;
+import com.example.finalexam.my_interface.IClickItemJobListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder> {
 
-    private ArrayList<Job> jobs;
-    private OnJobClickListener onJobClickListener;
+    private ArrayList<Job> listJob;
+    IClickItemJobListener iClickItemJobListener;
 
-    public JobAdapter(ArrayList<Job> jobs, OnJobClickListener listener) {
-        this.jobs = jobs;
-        this.onJobClickListener = listener;
+    public JobAdapter(ArrayList<Job> listJob, IClickItemJobListener listener) {
+        this.listJob = listJob;
+        this.iClickItemJobListener = listener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_job, parent, false);
+        View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_job,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Job job = jobs.get(position);
-        holder.bind(job);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (onJobClickListener != null) {
-                    onJobClickListener.onJobClick(job); // Truyền job được nhấn vào onJobClick
+
+        Job job=listJob.get(position);
+        if(job==null){
+            return;
+        }
+        else{
+//            holder.ivCompany();
+            holder.tvJobTitle.setText(job.getTitle());
+            holder.tvCompany.setText(job.getCompany());
+            holder.tvLocation.setText(job.getAddress());
+            holder.tvExperience.setText(job.getExp());
+            holder.layoutItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    iClickItemJobListener.onClickItemJob(job);
                 }
-            }
-        });
+            });
+
+        }
     }
 
     @Override
     public int getItemCount() {
-        return jobs.size();
+        if(listJob!=null) return listJob.size();
+        return 0;
     }
-
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView textJobTitle;
-        TextView textCompany;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            textJobTitle = itemView.findViewById(R.id.text_job_title);
-            textCompany = itemView.findViewById(R.id.text_company);
-            itemView.setOnClickListener(this);
-        }
-
-        public void bind(Job job) {
-            textJobTitle.setText(job.getTitle());
-            textCompany.setText(job.getCompany());
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (onJobClickListener != null) {
-                int position = getAdapterPosition();
-                if (position != RecyclerView.NO_POSITION) {
-                    onJobClickListener.onJobClick(jobs.get(position));
-                }
-            }
-        }
-        public void searchData(ArrayList<Job> searchList){
-            jobs=searchList;
-            notifyDataSetChanged();
-        }
-    }
-
-    public void setJobs(ArrayList<Job> jobs) {
-        this.jobs = jobs;
+        public void setJobs(ArrayList<Job> jobs) {
+        this.listJob = jobs;
         notifyDataSetChanged();
     }
 
 
-    public interface OnJobClickListener {
-        void onJobClick(Job job);
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private LinearLayout layoutItem;
+        private ImageView ivCompany;
+        private TextView tvJobTitle;
+        private TextView tvCompany;
+        private TextView tvLocation;
+        private TextView tvExperience;
+
+        public ViewHolder(@NonNull View itemView) {
+
+            super(itemView);
+            layoutItem=itemView.findViewById(R.id.layoutItem);
+            ivCompany = itemView.findViewById(R.id.ivCompany);
+            tvJobTitle = itemView.findViewById(R.id.tvJobTitle);
+            tvCompany = itemView.findViewById(R.id.tvCompany);
+            tvLocation = itemView.findViewById(R.id.tvLocation);
+            tvExperience = itemView.findViewById(R.id.tvExperience);
+        }
+
     }
 }
+
+
+
+
