@@ -17,7 +17,6 @@ import com.example.finalexam.R;
 import com.example.finalexam.job.JobDetail;
 import com.example.finalexam.job.adapter.JobAdapter;
 import com.example.finalexam.job.model.Job;
-import com.example.finalexam.job.model.JobRepository;
 import com.example.finalexam.mainPage.MainPage;
 import com.example.finalexam.mainPage.Search;
 import com.google.firebase.database.DataSnapshot;
@@ -32,14 +31,13 @@ import java.util.ArrayList;
 public class homepageFragment extends Fragment implements JobAdapter.OnJobClickListener{
 
 
-    private JobRepository jobRepository;
 
     private String userId;
 
     private RecyclerView recyclerView;
     private ArrayList<Job> jobList;
     private JobAdapter adapter;
-    private EditText searchBar;
+    private TextView searchBar;
 
 
     @Override
@@ -65,10 +63,13 @@ public class homepageFragment extends Fragment implements JobAdapter.OnJobClickL
 //        System.out.println(jobRepository);
 //        adapter.setJobs(jobRepository.getJobList());
 
-        searchBar.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        searchBar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
+            public void onClick(View v) {
                 Intent intent =new Intent(requireContext(), Search.class);
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("jobList",jobList);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.example.finalexam.R;
 import com.example.finalexam.appliedJob.adapter.AppliedJobAdapter;
 import com.example.finalexam.job.JobDetail;
-import com.example.finalexam.job.adapter.jobAdapter;
+import com.example.finalexam.job.adapter.JobAdapter;
 import com.example.finalexam.job.model.Job;
 import com.example.finalexam.mainPage.MainPage;
 import com.google.firebase.database.DataSnapshot;

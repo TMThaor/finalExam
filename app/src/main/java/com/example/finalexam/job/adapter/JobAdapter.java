@@ -11,14 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.finalexam.R;
 import com.example.finalexam.job.model.Job;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder> {
 
-    private List<Job> jobs;
+    private ArrayList<Job> jobs;
     private OnJobClickListener onJobClickListener;
 
-    public JobAdapter(List<Job> jobs, OnJobClickListener listener) {
+    public JobAdapter(ArrayList<Job> jobs, OnJobClickListener listener) {
         this.jobs = jobs;
         this.onJobClickListener = listener;
     }
@@ -74,9 +75,13 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder> {
                 }
             }
         }
+        public void searchData(ArrayList<Job> searchList){
+            jobs=searchList;
+            notifyDataSetChanged();
+        }
     }
 
-    public void setJobs(List<Job> jobs) {
+    public void setJobs(ArrayList<Job> jobs) {
         this.jobs = jobs;
         notifyDataSetChanged();
     }

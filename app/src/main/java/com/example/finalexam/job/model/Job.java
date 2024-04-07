@@ -1,6 +1,8 @@
 package com.example.finalexam.job.model;
 
-public class Job {
+import java.io.Serializable;
+
+public class Job implements Serializable {
     String jobId;
 
     //Thông tin vắn tắt

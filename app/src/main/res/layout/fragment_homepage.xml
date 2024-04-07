@@ -9,16 +9,14 @@
     android:layout_margin="5dp">
 
     <!-- TODO: Update blank fragment layout -->
-    <EditText
+    <TextView
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:background="@drawable/custom_search_view"
-        android:layout_margin="10dp"
-        android:hint="  Search ...."
         android:drawableLeft="@drawable/search"
-        />
+        android:padding="8dp"
+        android:text="  Search ...."
+        android:background="@drawable/custom_search_view"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvJob"
