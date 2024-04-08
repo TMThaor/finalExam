@@ -17,7 +17,8 @@
             android:id="@+id/edit_text_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text" />
+            android:inputType="text"
+            android:maxLines="1"/>
 
         <!-- Role -->
         <TextView
@@ -28,7 +29,8 @@
             android:id="@+id/edit_text_role"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text" />
+            android:inputType="text"
+            android:maxLines="1"/>
 
         <!-- Phone Number -->
         <TextView
@@ -39,7 +41,8 @@
             android:id="@+id/edit_text_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="phone" />
+            android:inputType="phone"
+            android:maxLines="1"/>
 
         <!-- Email -->
         <TextView
@@ -50,7 +53,8 @@
             android:id="@+id/edit_text_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:maxLines="1"/>
 
         <!-- Address -->
         <TextView
@@ -61,7 +65,8 @@
             android:id="@+id/edit_text_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text" />
+            android:inputType="text"
+            android:maxLines="1"/>
 
         <!-- Gender -->
         <TextView
@@ -71,7 +76,9 @@
         <EditText
             android:id="@+id/edit_text_gender"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLines="1"/>
 
         <!-- Date of Birth -->
         <TextView
@@ -137,7 +144,8 @@
             android:id="@+id/edit_text_career_goals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textMultiLine" />
+            android:inputType="text"
+            android:maxLines="1"/>
 
         <!-- Social Activities -->
         <TextView
@@ -148,7 +156,8 @@
             android:id="@+id/edit_text_social_activities"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textMultiLine" />
+            android:inputType="text"
+            android:maxLines="1"/>
 
         <!-- Hobbies -->
         <TextView
@@ -181,7 +190,8 @@
             android:id="@+id/edit_text_more_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textMultiLine" />
+            android:inputType="text"
+            android:maxLines="1"/>
 
         <!-- Button to save CV -->
         <Button

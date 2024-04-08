@@ -1,204 +1,219 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Name -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                android:text="Name:" />
+            <TextView
+                android:id="@+id/text_view_name"
+                android:layout_width="match_parent"
+                android:editable="false"
+                android:layout_height="wrap_content" />
+
+            <!-- Role -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                android:text="Role:" />
+            <TextView
+                android:id="@+id/text_view_role"
+                android:layout_width="match_parent"
+                android:editable="false"
+                android:layout_height="wrap_content" />
+
+            <!-- Phone Number -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                android:text="Phone Number:" />
+            <TextView
+                android:id="@+id/text_view_phone"
+                android:layout_width="match_parent"
+                android:editable="false"
+                android:layout_height="wrap_content" />
+
+            <!-- Email -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                android:text="Email:" />
+            <TextView
+                android:id="@+id/text_view_email"
+                android:layout_width="match_parent"
+                android:editable="false"
+                android:layout_height="wrap_content" />
+
+            <!-- Address -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                android:text="Address:" />
+            <TextView
+                android:id="@+id/text_view_address"
+                android:layout_width="match_parent"
+                android:editable="false"
+                android:layout_height="wrap_content" />
+
+            <!-- Gender -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                android:text="Gender:" />
+            <TextView
+                android:id="@+id/text_view_gender"
+                android:layout_width="match_parent"
+                android:editable="false"
+                android:layout_height="wrap_content" />
+
+            <!-- Date of Birth -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                android:text="Date of Birth:" />
+            <TextView
+                android:id="@+id/text_view_dob"
+                android:layout_width="match_parent"
+                android:editable="false"
+                android:layout_height="wrap_content" />
+
+            <!-- Education -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                android:text="Education:" />
+            <TextView
+                android:id="@+id/text_view_education"
+                android:layout_width="match_parent"
+                android:editable="false"
+                android:layout_height="wrap_content" />
+
+            <!-- Job Experiment -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                android:text="Job Experiment:" />
+            <TextView
+                android:id="@+id/text_view_job_exp"
+                android:layout_width="match_parent"
+                android:editable="false"
+                android:layout_height="wrap_content" />
+
+            <!-- Degree -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                android:text="Degree:" />
+            <TextView
+                android:id="@+id/text_view_degree"
+                android:layout_width="match_parent"
+                android:editable="false"
+                android:layout_height="wrap_content" />
+
+            <!-- Skills -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                android:text="Skills:" />
+            <TextView
+                android:id="@+id/text_view_skills"
+                android:layout_width="match_parent"
+                android:editable="false"
+                android:layout_height="wrap_content" />
+
+            <!-- Career Goals -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                android:text="Career Goals:" />
+            <TextView
+                android:id="@+id/text_view_career_goals"
+                android:layout_width="match_parent"
+                android:editable="false"
+                android:layout_height="wrap_content" />
+
+            <!-- Social Activities -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                android:text="Social Activities:" />
+            <TextView
+                android:id="@+id/text_view_social_activities"
+                android:layout_width="match_parent"
+                android:editable="false"
+                android:layout_height="wrap_content" />
+
+            <!-- Hobbies -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                android:text="Hobbies:" />
+            <TextView
+                android:id="@+id/text_view_hobbies"
+                android:layout_width="match_parent"
+                android:editable="false"
+                android:layout_height="wrap_content" />
+
+            <!-- Achievement -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                android:text="Achievement:" />
+            <TextView
+                android:id="@+id/text_view_achievement"
+                android:layout_width="match_parent"
+                android:editable="false"
+                android:layout_height="wrap_content" />
+
+            <!-- More Info -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                android:text="More Info:" />
+            <TextView
+                android:id="@+id/text_view_more_info"
+                android:layout_width="match_parent"
+                android:editable="false"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+    </ScrollView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_edit_cv"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <!-- Name -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:editable="false"
-            android:text="Name:" />
-        <TextView
-            android:id="@+id/text_view_name"
-            android:layout_width="match_parent"
-            android:editable="false"
-            android:layout_height="wrap_content" />
-
-        <!-- Role -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:editable="false"
-            android:text="Role:" />
-        <TextView
-            android:id="@+id/text_view_role"
-            android:layout_width="match_parent"
-            android:editable="false"
-            android:layout_height="wrap_content" />
-
-        <!-- Phone Number -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:editable="false"
-            android:text="Phone Number:" />
-        <TextView
-            android:id="@+id/text_view_phone"
-            android:layout_width="match_parent"
-            android:editable="false"
-            android:layout_height="wrap_content" />
-
-        <!-- Email -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:editable="false"
-            android:text="Email:" />
-        <TextView
-            android:id="@+id/text_view_email"
-            android:layout_width="match_parent"
-            android:editable="false"
-            android:layout_height="wrap_content" />
-
-        <!-- Address -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:editable="false"
-            android:text="Address:" />
-        <TextView
-            android:id="@+id/text_view_address"
-            android:layout_width="match_parent"
-            android:editable="false"
-            android:layout_height="wrap_content" />
-
-        <!-- Gender -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:editable="false"
-            android:text="Gender:" />
-        <TextView
-            android:id="@+id/text_view_gender"
-            android:layout_width="match_parent"
-            android:editable="false"
-            android:layout_height="wrap_content" />
-
-        <!-- Date of Birth -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:editable="false"
-            android:text="Date of Birth:" />
-        <TextView
-            android:id="@+id/text_view_dob"
-            android:layout_width="match_parent"
-            android:editable="false"
-            android:layout_height="wrap_content" />
-
-        <!-- Education -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:editable="false"
-            android:text="Education:" />
-        <TextView
-            android:id="@+id/text_view_education"
-            android:layout_width="match_parent"
-            android:editable="false"
-            android:layout_height="wrap_content" />
-
-        <!-- Job Experiment -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:editable="false"
-            android:text="Job Experiment:" />
-        <TextView
-            android:id="@+id/text_view_job_exp"
-            android:layout_width="match_parent"
-            android:editable="false"
-            android:layout_height="wrap_content" />
-
-        <!-- Degree -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:editable="false"
-            android:text="Degree:" />
-        <TextView
-            android:id="@+id/text_view_degree"
-            android:layout_width="match_parent"
-            android:editable="false"
-            android:layout_height="wrap_content" />
-
-        <!-- Skills -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:editable="false"
-            android:text="Skills:" />
-        <TextView
-            android:id="@+id/text_view_skills"
-            android:layout_width="match_parent"
-            android:editable="false"
-            android:layout_height="wrap_content" />
-
-        <!-- Career Goals -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:editable="false"
-            android:text="Career Goals:" />
-        <TextView
-            android:id="@+id/text_view_career_goals"
-            android:layout_width="match_parent"
-            android:editable="false"
-            android:layout_height="wrap_content" />
-
-        <!-- Social Activities -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:editable="false"
-            android:text="Social Activities:" />
-        <TextView
-            android:id="@+id/text_view_social_activities"
-            android:layout_width="match_parent"
-            android:editable="false"
-            android:layout_height="wrap_content" />
-
-        <!-- Hobbies -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:editable="false"
-            android:text="Hobbies:" />
-        <TextView
-            android:id="@+id/text_view_hobbies"
-            android:layout_width="match_parent"
-            android:editable="false"
-            android:layout_height="wrap_content" />
-
-        <!-- Achievement -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:editable="false"
-            android:text="Achievement:" />
-        <TextView
-            android:id="@+id/text_view_achievement"
-            android:layout_width="match_parent"
-            android:editable="false"
-            android:layout_height="wrap_content" />
-
-        <!-- More Info -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:editable="false"
-            android:text="More Info:" />
-        <TextView
-            android:id="@+id/text_view_more_info"
-            android:layout_width="match_parent"
-            android:editable="false"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-</ScrollView>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:tint="@android:color/white"
+        android:elevation="6dp" />
+</RelativeLayout>

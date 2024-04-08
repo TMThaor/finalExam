@@ -9,8 +9,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.finalexam.R;
+import com.example.finalexam.mainPage.MainPage;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,33 +24,33 @@ import com.google.firebase.database.ValueEventListener;
 public class CVDetailFragment extends Fragment {
     private String userId;
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
+    TextView textViewName,textViewRole, textViewPhone, textViewEmail,textViewAddress, textViewGender, textViewDob, textViewEducation,
+            textViewJobExp, textViewDegree, textViewSkills, textViewCareerGoals, textViewSocialActivities, textViewHobbies, textViewAchievement, textViewMoreInfo;
+    FloatingActionButton EditCV;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cv_detail, container, false);
-        TextView textViewName = view.findViewById(R.id.text_view_name);
-        TextView textViewRole = view.findViewById(R.id.text_view_role);
-        TextView textViewPhone = view.findViewById(R.id.text_view_phone);
-        TextView textViewEmail = view.findViewById(R.id.text_view_email);
-        TextView textViewAddress = view.findViewById(R.id.text_view_address);
-        TextView textViewGender = view.findViewById(R.id.text_view_gender);
-        TextView textViewDob = view.findViewById(R.id.text_view_dob);
-        TextView textViewEducation = view.findViewById(R.id.text_view_education);
-        TextView textViewJobExp = view.findViewById(R.id.text_view_job_exp);
-        TextView textViewDegree = view.findViewById(R.id.text_view_degree);
-        TextView textViewSkills = view.findViewById(R.id.text_view_skills);
-        TextView textViewCareerGoals = view.findViewById(R.id.text_view_career_goals);
-        TextView textViewSocialActivities = view.findViewById(R.id.text_view_social_activities);
-        TextView textViewHobbies = view.findViewById(R.id.text_view_hobbies);
-        TextView textViewAchievement = view.findViewById(R.id.text_view_achievement);
-        TextView textViewMoreInfo = view.findViewById(R.id.text_view_more_info);
-
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("CV").child(userId);
-        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        textViewName = view.findViewById(R.id.text_view_name);
+        textViewRole = view.findViewById(R.id.text_view_role);
+        textViewPhone = view.findViewById(R.id.text_view_phone);
+        textViewEmail = view.findViewById(R.id.text_view_email);
+        textViewAddress = view.findViewById(R.id.text_view_address);
+        textViewGender = view.findViewById(R.id.text_view_gender);
+        textViewDob = view.findViewById(R.id.text_view_dob);
+        textViewEducation = view.findViewById(R.id.text_view_education);
+        textViewJobExp = view.findViewById(R.id.text_view_job_exp);
+        textViewDegree = view.findViewById(R.id.text_view_degree);
+        textViewSkills = view.findViewById(R.id.text_view_skills);
+        textViewCareerGoals = view.findViewById(R.id.text_view_career_goals);
+        textViewSocialActivities = view.findViewById(R.id.text_view_social_activities);
+        textViewHobbies = view.findViewById(R.id.text_view_hobbies);
+        textViewAchievement = view.findViewById(R.id.text_view_achievement);
+        textViewMoreInfo = view.findViewById(R.id.text_view_more_info);
+        EditCV = view.findViewById(R.id.fab_edit_cv);
+        userId = MainPage.getId();
+        DatabaseReference cvRef = FirebaseDatabase.getInstance().getReference().child("CV").child(userId);
+        cvRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
@@ -76,6 +80,12 @@ public class CVDetailFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+        EditCV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openEditCVFormFragment();
+            }
+        });
         return view;
     }
 
@@ -86,5 +96,15 @@ public class CVDetailFragment extends Fragment {
             result.append(child.getValue(String.class)).append("\n");
         }
         return result.toString();
+    }
+    private void openEditCVFormFragment() {
+        CVFormFragment cvFormFragment = new CVFormFragment();
+
+        // Sử dụng FragmentManager để thêm CVFormFragment vào back stack
+        FragmentManager fragmentManager = getParentFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, cvFormFragment)
+                .addToBackStack(null)
+                .commit();
     }
 }

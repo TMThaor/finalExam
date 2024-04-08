@@ -8,14 +8,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.finalexam.R;
+import com.example.finalexam.mainPage.MainPage;
 import com.example.finalexam.user.model.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,9 +29,6 @@ public class CVFormFragment extends Fragment {
 
     private String userId;
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
     private EditText editTextName, editTextRole, editTextPhone, editTextEmail, editTextAddress, editTextDob,
             editTextEducation, editTextJobExperiment, editTextDegree, editTextSkills, editGender,
             editTextCareerGoals, editTextSocialActivities, editTextHobbies, editTextAchievement, editTextMoreInfo;
@@ -62,6 +64,7 @@ public class CVFormFragment extends Fragment {
         editGender = view.findViewById(R.id.edit_text_gender);
         buttonSaveCV = view.findViewById(R.id.button_save_cv);
 
+        CheckUserHasCV();
         // Xử lý sự kiện khi nhấn vào nút "Save CV"
         buttonSaveCV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,9 +79,47 @@ public class CVFormFragment extends Fragment {
         return view;
     }
 
+    private void CheckUserHasCV() {
+        userId = MainPage.getId();
+        DatabaseReference cvRef = FirebaseDatabase.getInstance().getReference().child("CV").child(userId);
+        cvRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    editTextName.setText(snapshot.child("name").getValue(String.class));
+                    editTextRole.setText(snapshot.child("role").getValue(String.class));
+                    editTextPhone.setText(snapshot.child("phoneNumber").getValue(String.class));
+                    editTextEmail.setText(snapshot.child("email").getValue(String.class));
+                    editTextAddress.setText(snapshot.child("address").getValue(String.class));
+                    editGender.setText(snapshot.child("gender").getValue(String.class));
+                    editTextDob.setText(snapshot.child("dob").getValue(String.class));
+
+                    // Hiển thị dữ liệu từ ArrayList<String>
+                    editTextEducation.setText(arrayListToString(snapshot.child("education")));
+                    editTextJobExperiment.setText(arrayListToString(snapshot.child("jobExperiment")));
+                    editTextDegree.setText(arrayListToString(snapshot.child("degree")));
+                    editTextSkills.setText(arrayListToString(snapshot.child("skills")));
+                    editTextHobbies.setText(arrayListToString(snapshot.child("hobbies")));
+                    editTextAchievement.setText(arrayListToString(snapshot.child("achievement")));
+
+                    editTextCareerGoals.setText(snapshot.child("careerGoals").getValue(String.class));
+                    editTextSocialActivities.setText(snapshot.child("socialActivities").getValue(String.class));
+                    editTextMoreInfo.setText(snapshot.child("moreInfo").getValue(String.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Xử lý khi có lỗi xảy ra
+                Toast.makeText(getActivity(), "Failed to retrieve CV data", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     // Phương thức lưu thông tin CV vào Firebase Database
     private void saveCVToFirebase() {
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("CV").child(userId);
+        userId = MainPage.getId();
+        DatabaseReference cvRef = FirebaseDatabase.getInstance().getReference().child("CV").child(userId);
         // Lấy thông tin từ các trường EditText và Spinner
         String name = editTextName.getText().toString().trim();
         String role = editTextRole.getText().toString().trim();
@@ -126,10 +167,18 @@ public class CVFormFragment extends Fragment {
         user.setMoreInfo(moreInfo);
         user.setGender(gender);
 
+
         // Lưu thông tin User vào Firebase Database
-        userRef.setValue(user);
+        cvRef.setValue(user);
 
         // Hiển thị thông báo lưu thành công
         Toast.makeText(getActivity(), "CV saved successfully", Toast.LENGTH_SHORT).show();
+    }
+    private String arrayListToString(DataSnapshot dataSnapshot) {
+        StringBuilder result = new StringBuilder();
+        for (DataSnapshot child : dataSnapshot.getChildren()) {
+            result.append(child.getValue(String.class)).append("\n");
+        }
+        return result.toString();
     }
 }
