@@ -44,6 +44,7 @@ public class homepageFragment extends Fragment{
     private TextView searchBar;
 
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +59,10 @@ public class homepageFragment extends Fragment{
         //đổ dữ liệu lên recyclerView job
         jobRecyclerView = view.findViewById(R.id.rvJob);
         searchBar=view.findViewById(R.id.search_bar);
-        jobRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        jobRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),4);
+        gridLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        jobRecyclerView.setLayoutManager(gridLayoutManager);
         jobList = new ArrayList<>();
 
 
@@ -109,7 +113,7 @@ public class homepageFragment extends Fragment{
 
     private void initData() {
         DatabaseReference jobsRef = FirebaseDatabase.getInstance().getReference("jobs");
-        jobsRef.orderByChild("salary").startAfter(5000.0).addValueEventListener(new ValueEventListener() {
+        jobsRef.limitToFirst(12).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 jobList = new ArrayList<>();
@@ -127,7 +131,7 @@ public class homepageFragment extends Fragment{
         });
 
         DatabaseReference comRef=FirebaseDatabase.getInstance().getReference("companies");
-        comRef.addValueEventListener(new ValueEventListener() {
+        comRef.limitToFirst(6).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 comList = new ArrayList<>();

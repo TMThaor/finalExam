@@ -1,39 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".mainPage.Search"
-    android:orientation="vertical"
-    android:layout_margin="10dp">
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        >
 
-        <Button
-            android:id="@+id/btnBack"
-            android:layout_gravity="center"
-
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/back"
-            />
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search"
-            android:layout_gravity="center"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:queryHint="Địa điểm - vị trí - ngành nghề"
-            app:iconifiedByDefault="false"
+            android:orientation="horizontal"
+            android:layout_marginBottom="15dp">
+
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_gravity="center"
+
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/back"
+                />
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:queryHint="Địa điểm - vị trí - ngành nghề"
+                app:iconifiedByDefault="false"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/recommentWord">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Từ khóa phổ biến"
+                android:textColor="@color/blue"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPopularKeyword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/searchList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
             />
     </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searchList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-</LinearLayout>
+</ScrollView>

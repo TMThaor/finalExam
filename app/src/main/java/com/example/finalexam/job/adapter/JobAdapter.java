@@ -1,6 +1,8 @@
 package com.example.finalexam.job.adapter;
 
 import android.content.Context;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +13,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.finalexam.R;
 import com.example.finalexam.job.model.Job;
 import com.example.finalexam.my_interface.IClickItemJobListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +53,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder> {
 //            holder.ivCompany();
             holder.tvJobTitle.setText(job.getTitle());
             holder.tvCompany.setText(job.getCompany());
-            holder.tvLocation.setText(job.getAddress());
+            holder.tvLocation.setText(job.getShortAddress());
             holder.tvExperience.setText(job.getExp());
             holder.layoutItem.setOnClickListener(new View.OnClickListener() {
                 @Override

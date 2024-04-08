@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.finalexam.R;
 import com.example.finalexam.databinding.ActivitySearchBinding;
@@ -34,6 +36,7 @@ public class Search extends AppCompatActivity {
     JobAdapter mAdapter;
     RecyclerView rvSearchList;
     SearchView searchView;
+    LinearLayout recommentWord;
     private String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class Search extends AppCompatActivity {
         btnBack=binding.btnBack;
         rvSearchList=binding.searchList;
         searchView=binding.search;
+        recommentWord=findViewById(R.id.recommentWord);
 
         initData();
         rvSearchList.setLayoutManager(new LinearLayoutManager(this));
@@ -62,16 +66,23 @@ public class Search extends AppCompatActivity {
                 finish();
             }
         });
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                    filter(query);
+                filter(query);
+                recommentWord.setVisibility(View.GONE);
+                searchView.clearFocus();
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                return false;
+                if(newText.equals("")){
+                    recommentWord.setVisibility(View.VISIBLE);
+                    mAdapter.setJobs(new ArrayList<>());
+                }
+                return true;
             }
         });
     }
