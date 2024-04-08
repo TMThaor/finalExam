@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 public class JobDetail extends AppCompatActivity {
 
     private TextView jobIdTextView, jobTitleTextView, jobCompanyTextView, jobOppTextView, jobAddressTextView,
-            jobExpTextView, jobDegreeTextView, jobDesTextView, jobSalaryTextView;
+            jobExpTextView, jobDegreeTextView, jobDesTextView, jobSalaryTextView, jobCagetory, jobRequirement, jobBenefit;
     private Button applyButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,9 @@ public class JobDetail extends AppCompatActivity {
         jobDegreeTextView = findViewById(R.id.job_degree_text_view);
         jobDesTextView = findViewById(R.id.job_des_text_view);
         jobSalaryTextView = findViewById(R.id.job_salary_text_view);
+        jobCagetory = findViewById(R.id.job_category_text_view);
+        jobRequirement = findViewById(R.id.job_requirement_text_view);
+        jobBenefit = findViewById(R.id.job_benefit_text_view);
         applyButton = findViewById(R.id.apply_button);
         //Demo
         Bundle extras = getIntent().getExtras();
@@ -55,6 +58,9 @@ public class JobDetail extends AppCompatActivity {
             jobDegreeTextView.setText("Role: " + job.getRole());
             jobDesTextView.setText("Description: " + job.getDescription());
             jobSalaryTextView.setText("Salary: " + String.valueOf(job.getSalary()));
+            jobCagetory.setText("Cagetory: " + job.getCategory());
+            jobRequirement.setText("Requirement: " + job.getRequirement());
+            jobBenefit.setText("Benefit: " + job.getBenefit());
         }
         applyButton.setOnClickListener(new View.OnClickListener() {
             @Override

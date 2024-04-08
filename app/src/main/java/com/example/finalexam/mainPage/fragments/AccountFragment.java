@@ -37,8 +37,6 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(requireContext() , AppliedJob.class);
-                userId =((MainPage)requireActivity()).getId();
-                intent.putExtra("user_id", userId);
                 startActivity(intent);
             }
         });

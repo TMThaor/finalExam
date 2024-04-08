@@ -30,6 +30,14 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/job_category_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category: "
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
         android:id="@+id/job_opp_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -70,10 +78,26 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/job_requirement_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Requirement: "
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
         android:id="@+id/job_salary_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Salary: "
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/job_benefit_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Benefit: "
         android:textSize="18sp"
         android:textStyle="bold" />
 

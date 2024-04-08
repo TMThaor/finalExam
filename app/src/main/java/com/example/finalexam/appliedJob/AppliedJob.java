@@ -36,10 +36,10 @@ public class AppliedJob extends AppCompatActivity implements AppliedJobAdapter.O
         setContentView(R.layout.activity_applied_job);
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        String userId = getIntent().getStringExtra("user_id");
-        if (userId != null) {
+        userID = MainPage.getId();
+        if (userID != null) {
             Bundle extras = getIntent().getExtras();
-            DatabaseReference appliedJobRef = FirebaseDatabase.getInstance().getReference("ApplyJob").child(userId);
+            DatabaseReference appliedJobRef = FirebaseDatabase.getInstance().getReference("ApplyJob").child(userID);
 
             appliedJobs = new ArrayList<>(); // Khởi tạo danh sách công việc đã ứng tuyển
             appliedJobAdapter = new AppliedJobAdapter(appliedJobs, AppliedJob.this); // Khởi tạo adapter
