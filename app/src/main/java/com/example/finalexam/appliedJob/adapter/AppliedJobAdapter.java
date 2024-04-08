@@ -3,6 +3,7 @@ package com.example.finalexam.appliedJob.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -50,19 +51,24 @@ public class AppliedJobAdapter extends RecyclerView.Adapter<AppliedJobAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView textJobTitle;
-        TextView textCompany;
+        ImageView imgCompany;
+        TextView textJobTitle, textCompany, textLocation, textExp;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            imgCompany = itemView.findViewById(R.id.img_company);
             textJobTitle = itemView.findViewById(R.id.text_job_title);
             textCompany = itemView.findViewById(R.id.text_company);
+            textLocation = itemView.findViewById(R.id.text_location);
+            textExp = itemView.findViewById(R.id.text_exp);
             itemView.setOnClickListener(this);
         }
 
         public void bind(Job appliedJob) {
             textJobTitle.setText(appliedJob.getTitle());
             textCompany.setText(appliedJob.getCompany());
+            textLocation.setText(appliedJob.getAddress());
+            textExp.setText(appliedJob.getExp());
         }
 
         @Override

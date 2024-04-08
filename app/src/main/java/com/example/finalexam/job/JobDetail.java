@@ -60,12 +60,13 @@ public class JobDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Lấy userID từ Intent
-                String userId = getIntent().getStringExtra("user_id");
+                String userId = MainPage.getId();
 
                 if (userId != null) {
                     Bundle extras = getIntent().getExtras();
                     if (extras != null) {
-                        String jobId = extras.getString("job_id");
+                        Job job=(Job) extras.get("object_job");
+                        String jobId = job.getJobId();
 
                         // Kiểm tra xem người dùng đã apply công việc này chưa
                         DatabaseReference applyJobRef = FirebaseDatabase.getInstance().getReference("ApplyJob").child(userId).child(jobId);

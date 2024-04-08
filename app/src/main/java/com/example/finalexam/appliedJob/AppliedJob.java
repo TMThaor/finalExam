@@ -58,14 +58,8 @@ public class AppliedJob extends AppCompatActivity implements AppliedJobAdapter.O
                             @Override
                             public void onDataChange(DataSnapshot snapshot) {
                                 if (snapshot.exists()) {
-                                    String title = snapshot.child("title").getValue(String.class);
-                                    String company = snapshot.child("company").getValue(String.class);
-                                    Job appliedJob = new Job();
-                                    appliedJob.setJobId(jobId);
-                                    appliedJob.setTitle(title);
-                                    appliedJob.setCompany(company);
-                                    appliedJobs.add(appliedJob); // Thêm công việc vào danh sách
-                                    appliedJobAdapter.notifyDataSetChanged(); // Cập nhật adapter
+                                    Job appliedjob = snapshot.getValue(Job.class);
+                                    appliedJobs.add(appliedjob);
                                 }
                                 appliedJobAdapter.setAppliedJobs(appliedJobs);
                             }
@@ -88,9 +82,9 @@ public class AppliedJob extends AppCompatActivity implements AppliedJobAdapter.O
 
     public void onAppliedJobClick(Job appliedjob) {
         Intent intent = new Intent(this, JobDetail.class);
-        intent.putExtra("job_id", appliedjob.getJobId());
-        intent.putExtra("job_title", appliedjob.getTitle());
-        intent.putExtra("job_company", appliedjob.getCompany());
+        Bundle bundle=new Bundle();
+        bundle.putSerializable("object_job",appliedjob);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 }

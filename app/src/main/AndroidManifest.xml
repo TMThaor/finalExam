@@ -22,10 +22,10 @@
             android:name=".appliedJob.AppliedJob"
             android:exported="false" />
         <activity
-            android:name=".signin_signup.SignIn"
+            android:name=".mainPage.MainPage"
             android:exported="false" />
         <activity
-            android:name=".mainPage.MainPage"
+            android:name=".signin_signup.SignIn"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
