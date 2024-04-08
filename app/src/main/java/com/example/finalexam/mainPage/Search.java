@@ -19,6 +19,11 @@ import com.example.finalexam.job.JobDetail;
 import com.example.finalexam.job.adapter.JobAdapter;
 import com.example.finalexam.job.model.Job;
 import com.example.finalexam.my_interface.IClickItemJobListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -40,9 +45,7 @@ public class Search extends AppCompatActivity {
         rvSearchList=binding.searchList;
         searchView=binding.search;
 
-        Bundle b=getIntent().getExtras();
-        if(b==null) return;
-        jobList= (ArrayList<Job>) b.get("jobList");
+        initData();
         rvSearchList.setLayoutManager(new LinearLayoutManager(this));
 
         mAdapter=new JobAdapter(new ArrayList<>(), new IClickItemJobListener() {
@@ -69,6 +72,24 @@ public class Search extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
+            }
+        });
+    }
+    private void initData() {
+        DatabaseReference jobsRef = FirebaseDatabase.getInstance().getReference("jobs");
+        jobsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                jobList = new ArrayList<>();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Job job= snapshot.getValue(Job.class);
+                    jobList.add(job);
+                }
+                // Cập nhật adapter của RecyclerView với danh sách mới
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
             }
         });
     }

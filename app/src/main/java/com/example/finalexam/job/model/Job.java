@@ -6,7 +6,7 @@ public class Job implements Serializable {
     String jobId;
 
     //Thông tin vắn tắt
-    String  company, title, opp, shortAddress, exp, role;
+    String  company, title, opp, shortAddress, exp, role,category;
 
     //Thông tin chi tiết
     String description,requirement,benefit,address;
@@ -16,7 +16,7 @@ public class Job implements Serializable {
     public Job() {
     }
 
-    public Job(String jobId, String company, String title, String opp, String shortAddress, String exp, String role, String description, double salary, String requirement, String benefit, String address) {
+    public Job(String jobId, String company, String title, String opp, String shortAddress, String exp, String role, String category, String description, String requirement, String benefit, String address, double salary) {
         this.jobId = jobId;
         this.company = company;
         this.title = title;
@@ -24,6 +24,7 @@ public class Job implements Serializable {
         this.shortAddress = shortAddress;
         this.exp = exp;
         this.role = role;
+        this.category = category;
         this.description = description;
         this.requirement = requirement;
         this.benefit = benefit;
@@ -125,5 +126,13 @@ public class Job implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

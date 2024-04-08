@@ -63,7 +63,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder> {
         if(listJob!=null) return listJob.size();
         return 0;
     }
-        public void setJobs(ArrayList<Job> jobs) {
+    public void setJobs(ArrayList<Job> jobs) {
         this.listJob = jobs;
         notifyDataSetChanged();
     }

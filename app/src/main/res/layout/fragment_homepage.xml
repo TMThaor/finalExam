@@ -1,27 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".mainPage.fragments.homepageFragment"
-    android:orientation="vertical"
-    android:layout_margin="5dp">
+    >
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/search_bar"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/search"
-        android:padding="8dp"
-        android:text="  Search ...."
-        android:background="@drawable/custom_search_view"/>
+        android:orientation="vertical"
+        android:layout_margin="5dp">
+        <TextView
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/search"
+            android:padding="8dp"
+            android:text="  Tìm kiếm công việc phù hợp với bạn"
+            android:background="@drawable/custom_search_view"
+            android:layout_marginBottom="10dp"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvJob"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Việc làm hấp dẫn"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvJob"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Công ty hàng đầu"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCompany"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            />
+    </LinearLayout>
 
-</LinearLayout>
+</ScrollView>
