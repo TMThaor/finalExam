@@ -42,7 +42,7 @@ public class AppliedJob extends AppCompatActivity implements AppliedJobAdapter.O
             DatabaseReference appliedJobRef = FirebaseDatabase.getInstance().getReference("ApplyJob").child(userID);
 
             appliedJobs = new ArrayList<>(); // Khởi tạo danh sách công việc đã ứng tuyển
-            appliedJobAdapter = new AppliedJobAdapter(appliedJobs, AppliedJob.this); // Khởi tạo adapter
+            appliedJobAdapter = new AppliedJobAdapter(appliedJobs, AppliedJob.this, this); // Khởi tạo adapter
             recyclerView.setAdapter(appliedJobAdapter);
             // Lắng nghe sự kiện thay đổi trên node "ApplyJob" của người dùng
             appliedJobRef.addValueEventListener(new ValueEventListener() {

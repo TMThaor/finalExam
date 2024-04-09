@@ -22,6 +22,7 @@ import com.example.finalexam.job.JobDetail;
 import com.example.finalexam.job.adapter.JobAdapter;
 import com.example.finalexam.job.model.Job;
 import com.example.finalexam.mainPage.MainPage;
+import com.example.finalexam.mainPage.MoreJob;
 import com.example.finalexam.mainPage.Search;
 import com.example.finalexam.my_interface.IClickItemJobListener;
 import com.google.firebase.database.DataSnapshot;
@@ -99,7 +100,8 @@ public class homepageFragment extends Fragment{
         moreJob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(requireContext(), MoreJob.class);
+                startActivity(intent);
             }
         });
         return view;

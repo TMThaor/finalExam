@@ -1,5 +1,7 @@
 package com.example.finalexam.appliedJob.adapter;
 
+import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.finalexam.R;
 import com.example.finalexam.job.model.Job;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
@@ -19,9 +25,12 @@ public class AppliedJobAdapter extends RecyclerView.Adapter<AppliedJobAdapter.Vi
     private List<Job> appliedJobs;
     private OnJobClickListener onJobClickListener;
 
-    public AppliedJobAdapter(List<Job> jobs, OnJobClickListener listener) {
-        this.appliedJobs = jobs;
+    Context mContext;
+
+    public AppliedJobAdapter(List<Job> appliedJobs, OnJobClickListener listener, Context mContext) {
+        this.appliedJobs = appliedJobs;
         this.onJobClickListener = listener;
+        this.mContext = mContext;
     }
 
     @NonNull
@@ -67,8 +76,19 @@ public class AppliedJobAdapter extends RecyclerView.Adapter<AppliedJobAdapter.Vi
         public void bind(Job appliedJob) {
             textJobTitle.setText(appliedJob.getTitle());
             textCompany.setText(appliedJob.getCompany());
-            textLocation.setText(appliedJob.getAddress());
+            textLocation.setText(appliedJob.getShortAddress());
             textExp.setText(appliedJob.getExp());
+            loadCompanyLogo(appliedJob.getCompanyLogo(), imgCompany);
+        }
+        private void loadCompanyLogo(String logoUrl, ImageView imageView) {
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+            StorageReference storageRef = storage.getReference().child("logos/" + logoUrl);
+            storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Glide.with(mContext).load(uri).into(imageView);
+                }
+            });
         }
 
         @Override
