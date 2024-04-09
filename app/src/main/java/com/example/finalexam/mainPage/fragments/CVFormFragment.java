@@ -136,7 +136,7 @@ public class CVFormFragment extends Fragment {
                     editTextSocialActivities.setText(snapshot.child("socialActivities").getValue(String.class));
                     editTextMoreInfo.setText(snapshot.child("moreInfo").getValue(String.class));
 
-                    String photoUid = snapshot.child("photoUid").getValue(String.class);
+                    photoUid = snapshot.child("photoUid").getValue(String.class);
                     loadPhotoImage(photoUid);
                 }
             }
@@ -180,10 +180,6 @@ public class CVFormFragment extends Fragment {
             Toast.makeText(requireContext(), "Vui lòng điền tất cả các trường", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(photoUid == null){
-            Toast.makeText(requireContext(), "Vui lòng chọn ảnh", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
         // Tạo đối tượng User và set các thông tin
         User user = new User();
@@ -204,6 +200,7 @@ public class CVFormFragment extends Fragment {
         user.setMoreInfo(moreInfo);
         user.setGender(gender);
         user.setPhotoUid(photoUid);
+
 
 
         // Lưu thông tin User vào Firebase Database
@@ -231,7 +228,7 @@ public class CVFormFragment extends Fragment {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     String photoUrl = uri.toString();
-                                    photoUid = storageRef.getName();
+                                    photoUid = fileName;
 
                                     // Hiển thị ảnh đã chọn trong imgPhoto
                                     Glide.with(requireContext()).load(photoUrl).into(imgCVPhoto);
