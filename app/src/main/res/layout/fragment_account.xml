@@ -4,7 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".mainPage.fragments.AccountFragment">
-
+    <ImageView
+        android:id="@+id/img_user_photo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_launcher_background"
+        android:layout_gravity="center_horizontal"/>
     <!-- Danh sách công việc đã ứng tuyển -->
     <TextView
         android:id="@+id/text_applied_jobs"

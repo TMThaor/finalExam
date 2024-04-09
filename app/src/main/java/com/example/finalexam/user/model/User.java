@@ -17,6 +17,7 @@ public class User {
     private ArrayList<String> hobbies;
     private ArrayList<String> achievement;
     private String moreInfo;
+    private String photoUid;
 
     public User() {
     }
@@ -38,12 +39,13 @@ public class User {
         this.hobbies = null;
         this.achievement = null;
         this.moreInfo = null;
+        this.photoUid = null;
     }
 
     public User(String userId, String name, String role, String phoneNumber, String email, String address,
                 String gender, String DOB, ArrayList<String> education, ArrayList<String> jobExperiment,
                 ArrayList<String> degree, ArrayList<String> skills, String careerGoals, String socialActivities,
-                ArrayList<String> hobbies, ArrayList<String> achievement, String moreInfo)
+                ArrayList<String> hobbies, ArrayList<String> achievement, String moreInfo, String photoUid)
     {
         this.userId = userId;
         this.name = name;
@@ -62,6 +64,7 @@ public class User {
         this.hobbies = hobbies;
         this.achievement = achievement;
         this.moreInfo = moreInfo;
+        this.photoUid = photoUid;
     }
 
     public String getUserId() {
@@ -198,5 +201,13 @@ public class User {
 
     public void setMoreInfo(String moreInfo) {
         this.moreInfo = moreInfo;
+    }
+
+    public String getPhotoUid() {
+        return photoUid;
+    }
+
+    public void setPhotoUid(String photoUid) {
+        this.photoUid = photoUid;
     }
 }

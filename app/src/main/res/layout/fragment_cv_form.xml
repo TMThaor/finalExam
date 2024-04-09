@@ -7,6 +7,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
+        <!-- Image -->
+        <ImageView
+            android:id="@+id/img_cv_photo"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/ic_launcher_background"/>
 
         <!-- Name -->
         <TextView

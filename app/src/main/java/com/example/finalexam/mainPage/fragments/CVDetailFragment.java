@@ -1,9 +1,12 @@
 package com.example.finalexam.mainPage.fragments;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,25 +15,32 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.bumptech.glide.Glide;
 import com.example.finalexam.R;
 import com.example.finalexam.mainPage.MainPage;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class CVDetailFragment extends Fragment {
     private String userId;
 
-    TextView textViewName,textViewRole, textViewPhone, textViewEmail,textViewAddress, textViewGender, textViewDob, textViewEducation,
+    private ImageView imgCVPhoto;
+    private TextView textViewName,textViewRole, textViewPhone, textViewEmail,textViewAddress, textViewGender, textViewDob, textViewEducation,
             textViewJobExp, textViewDegree, textViewSkills, textViewCareerGoals, textViewSocialActivities, textViewHobbies, textViewAchievement, textViewMoreInfo;
-    FloatingActionButton EditCV;
+    private FloatingActionButton EditCV;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cv_detail, container, false);
+        imgCVPhoto = view.findViewById(R.id.img_cv_photo);
         textViewName = view.findViewById(R.id.text_view_name);
         textViewRole = view.findViewById(R.id.text_view_role);
         textViewPhone = view.findViewById(R.id.text_view_phone);
@@ -73,6 +83,9 @@ public class CVDetailFragment extends Fragment {
                     textViewCareerGoals.setText(snapshot.child("careerGoals").getValue(String.class));
                     textViewSocialActivities.setText(snapshot.child("socialActivities").getValue(String.class));
                     textViewMoreInfo.setText(snapshot.child("moreInfo").getValue(String.class));
+
+                    String photoUid = snapshot.child("photoUid").getValue(String.class);
+                    loadPhotoImage(photoUid);
                 }
             }
 
@@ -106,5 +119,19 @@ public class CVDetailFragment extends Fragment {
                 .replace(R.id.fragment_container, cvFormFragment)
                 .addToBackStack(null)
                 .commit();
+    }
+    private void loadPhotoImage(String photoUid){
+        if(TextUtils.isEmpty(photoUid)){
+            imgCVPhoto.setImageResource(R.drawable.ic_launcher_background);
+            return;
+        }
+        StorageReference cvPhoto = FirebaseStorage.getInstance().getReference().child("user_photos/" + photoUid);
+
+        cvPhoto.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(requireContext()).load(uri).into(imgCVPhoto);
+            }
+        });
     }
 }
