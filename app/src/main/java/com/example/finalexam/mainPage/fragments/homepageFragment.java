@@ -42,6 +42,7 @@ public class homepageFragment extends Fragment{
     private JobAdapter jAdapter;
     private CompanyAdapter cAdapter;
     private TextView searchBar;
+    private TextView moreJob;
 
 
 
@@ -67,8 +68,8 @@ public class homepageFragment extends Fragment{
 
 
 //        initJobs();
-        initData();
-        jAdapter = new JobAdapter(jobList, new IClickItemJobListener() {
+        initData();//Khởi tạo dữ liệu từ firebase
+        jAdapter = new JobAdapter(requireContext(),jobList, new IClickItemJobListener() {
             @Override
             public void onClickItemJob(Job job) {
                 goToDetail(job);
@@ -76,6 +77,7 @@ public class homepageFragment extends Fragment{
         });
         jobRecyclerView.setAdapter(jAdapter);
 
+    //Set sự kiện click cho tìm kiếm
         searchBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,21 +90,30 @@ public class homepageFragment extends Fragment{
         comRecyclerView=view.findViewById(R.id.rvCompany);
         comRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
         comList=new ArrayList<>();
-        cAdapter=new CompanyAdapter();
+        cAdapter=new CompanyAdapter(requireContext());
         comRecyclerView.setAdapter(cAdapter);
 
+
+    //Set sự kiện cho nút xem thêm ở phần Việc làm hấp dẫn
+        moreJob=view.findViewById(R.id.tvMoreJob);
+        moreJob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         return view;
     }
 
 //    private void initJobs() {
 //        DatabaseReference jobsRef = FirebaseDatabase.getInstance().getReference("jobs");
 //        //Demo
-//        Job job1 = new Job("123", "ABC Company", "Software Engineer", "Full-time", "Ha Noi", "3 years", "Staff","IT", "Description", "null","null","null",5000.0);
-//        Job job2 = new Job("124", "XYZ Corporation", "Data Analyst", "Part-time", "TP. HCM", "2 years", "Staff","IT", "Description","null","null","null", 4000.0);
-//        Job job3 = new Job("125", "123 Enterprises", "Project Manager", "Full-time", "Ha Noi", "5 years", "Manager","IT", "Description","null","null","null", 6000.0);
-//        Job job4 = new Job("126", "FPT Software", "Software Engineer", "Full-time", "Ha Noi", "3 years", "Staff","IT", "Description","null","null","null", 5000.0);
-//        Job job5 = new Job("127", "Viettel", "Nhân viên chăm sóc khách hàng", "Part-time", "TP. HCM", "2 years", "Staff","IT", "Description","null","null","null", 4000.0);
-//        Job job6 = new Job("128", "StarBuck", "Quản lý cửa hàng", "Full-time", "Ha Noi", "5 years", "Manager","IT", "Description","null","null","null", 6000.0);
+//        Job job1 = new Job("123", "Công ty cổ phần Koffmann","logoKoffmann.png", "Software Engineer", "Full-time", "Ha Noi", "3 years", "Staff","IT", "Description", "null","null","null",5000.0);
+//        Job job2 = new Job("124", "Công ty TNHH Sailin", "logoSailun.png","Quản lý xưởng", "Full-time", "TP. HCM", "2 years", "Manager","Sản xuất", "Description","null","null","null", 6000.0);
+//        Job job3 = new Job("125", "Tập đoàn VinGroup","logoVingroup.jpg", "Project Manager", "Full-time", "Ha Noi", "5 years", "Manager","IT", "Description","null","null","null", 6000.0);
+//        Job job4 = new Job("126", "FPT Software","logoFpt.png", "Software Engineer", "Full-time", "Ha Noi", "3 years", "Staff","IT", "Description","null","null","null", 5000.0);
+//        Job job5 = new Job("127", "Viettel","logoViettel.jpg", "Nhân viên chăm sóc khách hàng", "Part-time", "TP. HCM", "2 years", "Staff","IT", "Description","null","null","null", 4000.0);
+//        Job job6 = new Job("128", "StarBucks","logoStarBucks.png", "Quản lý cửa hàng", "Full-time", "Ha Noi", "5 years", "Manager","IT", "Description","null","null","null", 6000.0);
 //        jobsRef.child(job1.getJobId()).setValue(job1);
 //        jobsRef.child(job2.getJobId()).setValue(job2);
 //        jobsRef.child(job3.getJobId()).setValue(job3);
@@ -113,7 +124,7 @@ public class homepageFragment extends Fragment{
 
     private void initData() {
         DatabaseReference jobsRef = FirebaseDatabase.getInstance().getReference("jobs");
-        jobsRef.limitToFirst(12).addValueEventListener(new ValueEventListener() {
+        jobsRef.orderByChild("salary").startAfter(4999.9).limitToFirst(12).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 jobList = new ArrayList<>();
@@ -130,6 +141,7 @@ public class homepageFragment extends Fragment{
             }
         });
 
+    //Khởi tạo dữ liệu cho rvCompany
         DatabaseReference comRef=FirebaseDatabase.getInstance().getReference("companies");
         comRef.limitToFirst(6).addValueEventListener(new ValueEventListener() {
             @Override
@@ -150,6 +162,7 @@ public class homepageFragment extends Fragment{
             }
         });
     }
+
 
     public void goToDetail(Job job) {
         Intent intent = new Intent(requireContext(), JobDetail.class);

@@ -24,15 +24,18 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.squareup.picasso.Picasso;
 
 public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder> {
 
     private ArrayList<Job> listJob;
     IClickItemJobListener iClickItemJobListener;
+    Context mContext;
 
-    public JobAdapter(ArrayList<Job> listJob, IClickItemJobListener listener) {
+    public JobAdapter(Context mContext,ArrayList<Job> listJob, IClickItemJobListener listener) {
         this.listJob = listJob;
         this.iClickItemJobListener = listener;
+        this.mContext=mContext;
     }
 
     @NonNull
@@ -51,6 +54,14 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder> {
         }
         else{
 //            holder.ivCompany();
+            FirebaseStorage storage=FirebaseStorage.getInstance();
+            StorageReference storageRef=storage.getReference();
+            storageRef.child("logos/"+job.getCompanyLogo()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Glide.with(mContext).load(uri).into(holder.ivCompany);
+                }
+            });
             holder.tvJobTitle.setText(job.getTitle());
             holder.tvCompany.setText(job.getCompany());
             holder.tvLocation.setText(job.getShortAddress());

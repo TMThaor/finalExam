@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Job implements Serializable {
     String jobId;
+    String companyLogo;
 
     //Thông tin vắn tắt
     String  company, title, opp, shortAddress, exp, role,category;
@@ -16,9 +17,10 @@ public class Job implements Serializable {
     public Job() {
     }
 
-    public Job(String jobId, String company, String title, String opp, String shortAddress, String exp, String role, String category, String description, String requirement, String benefit, String address, double salary) {
+    public Job(String jobId, String company,String companyLogo, String title, String opp, String shortAddress, String exp, String role, String category, String description, String requirement, String benefit, String address, double salary) {
         this.jobId = jobId;
         this.company = company;
+        this.companyLogo=companyLogo;
         this.title = title;
         this.opp = opp;
         this.shortAddress = shortAddress;
@@ -46,6 +48,14 @@ public class Job implements Serializable {
 
     public void setCompany(String company) {
         this.company = company;
+    }
+
+    public String getCompanyLogo() {
+        return companyLogo;
+    }
+
+    public void setCompanyLogo(String companyLogo) {
+        this.companyLogo = companyLogo;
     }
 
     public String getTitle() {

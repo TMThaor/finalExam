@@ -52,7 +52,7 @@ public class Search extends AppCompatActivity {
         initData();
         rvSearchList.setLayoutManager(new LinearLayoutManager(this));
 
-        mAdapter=new JobAdapter(new ArrayList<>(), new IClickItemJobListener() {
+        mAdapter=new JobAdapter(this,new ArrayList<>(), new IClickItemJobListener() {
             @Override
             public void onClickItemJob(Job job) {
                 goToDetail(job);
