@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ScrollView
+        android:paddingTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -14,177 +15,154 @@
             <!-- Image -->
             <ImageView
                 android:id="@+id/img_cv_photo"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="90dp"
+                android:layout_height="120dp"
                 android:layout_margin="8dp"
+                android:scaleType="centerCrop"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_launcher_background"/>
             <!-- Name -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:editable="false"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                android:text="Name:" />
+                android:text="Họ và Tên:" />
             <TextView
                 android:id="@+id/text_view_name"
                 android:layout_width="match_parent"
-                android:editable="false"
                 android:layout_height="30dp" />
 
             <!-- Role -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:editable="false"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                android:text="Role:" />
+                android:text="Vị trí ứng tuyển:" />
             <TextView
                 android:id="@+id/text_view_role"
                 android:layout_width="match_parent"
-                android:editable="false"
                 android:layout_height="30dp" />
 
             <!-- Phone Number -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:editable="false"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                android:text="Phone Number:" />
+                android:text="Số điện thoại:" />
             <TextView
                 android:id="@+id/text_view_phone"
                 android:layout_width="match_parent"
-                android:editable="false"
                 android:layout_height="30dp" />
 
             <!-- Email -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:editable="false"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:text="Email:" />
             <TextView
                 android:id="@+id/text_view_email"
                 android:layout_width="match_parent"
-                android:editable="false"
                 android:layout_height="30dp" />
 
             <!-- Address -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:editable="false"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                android:text="Address:" />
+                android:text="Địa chỉ:" />
             <TextView
                 android:id="@+id/text_view_address"
                 android:layout_width="match_parent"
-                android:editable="false"
                 android:layout_height="30dp" />
 
             <!-- Gender -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:editable="false"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                android:text="Gender:" />
+                android:text="Giới tính:" />
             <TextView
                 android:id="@+id/text_view_gender"
                 android:layout_width="match_parent"
-                android:editable="false"
                 android:layout_height="30dp" />
 
             <!-- Date of Birth -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:editable="false"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                android:text="Date of Birth:" />
+                android:text="Ngày sinh:" />
             <TextView
                 android:id="@+id/text_view_dob"
                 android:layout_width="match_parent"
-                android:editable="false"
                 android:layout_height="30dp" />
 
             <!-- Education -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:editable="false"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                android:text="Education:" />
+                android:text="Trình độ học vấn:" />
             <TextView
                 android:id="@+id/text_view_education"
                 android:layout_width="match_parent"
-                android:editable="false"
                 android:layout_height="30dp" />
 
             <!-- Job Experiment -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:editable="false"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                android:text="Job Experiment:" />
+                android:text="Kinh nghiệm làm việc" />
             <TextView
                 android:id="@+id/text_view_job_exp"
                 android:layout_width="match_parent"
-                android:editable="false"
                 android:layout_height="30dp" />
 
             <!-- Degree -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:editable="false"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                android:text="Degree:" />
+                android:text="Chứng chỉ:" />
             <TextView
                 android:id="@+id/text_view_degree"
                 android:layout_width="match_parent"
-                android:editable="false"
                 android:layout_height="30dp" />
 
             <!-- Skills -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:editable="false"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                android:text="Skills:" />
+                android:text="Các kỹ năng:" />
             <TextView
                 android:id="@+id/text_view_skills"
                 android:layout_width="match_parent"
-                android:editable="false"
                 android:layout_height="30dp" />
 
             <!-- Career Goals -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:editable="false"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                android:text="Career Goals:" />
+                android:text="Mục tiêu nghề nghiệp:" />
             <TextView
                 android:id="@+id/text_view_career_goals"
                 android:layout_width="match_parent"
-                android:editable="false"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:layout_height="30dp" />
@@ -193,68 +171,58 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:editable="false"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                android:text="Social Activities:" />
+                android:text="Hoạt động xã hội:" />
             <TextView
                 android:id="@+id/text_view_social_activities"
                 android:layout_width="match_parent"
-                android:editable="false"
                 android:layout_height="30dp" />
 
             <!-- Hobbies -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:editable="false"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                android:text="Hobbies:" />
+                android:text="Sở thích:" />
             <TextView
                 android:id="@+id/text_view_hobbies"
                 android:layout_width="match_parent"
-                android:editable="false"
                 android:layout_height="30dp" />
 
             <!-- Achievement -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:editable="false"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                android:text="Achievement:" />
+                android:text="Danh hiệu và giải thưởng:" />
             <TextView
                 android:id="@+id/text_view_achievement"
                 android:layout_width="match_parent"
-                android:editable="false"
                 android:layout_height="30dp" />
 
             <!-- More Info -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:editable="false"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                android:text="More Info:" />
+                android:text="Thông tin thêm:" />
             <TextView
                 android:id="@+id/text_view_more_info"
                 android:layout_width="match_parent"
-                android:editable="false"
                 android:layout_height="30dp" />
-
-
         </LinearLayout>
     </ScrollView>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_edit_cv"
+        android:src="@drawable/icon_alt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
-        android:tint="@android:color/white"
-        android:elevation="6dp" />
+         />
 </RelativeLayout>
