@@ -65,7 +65,11 @@ public class SignIn extends AppCompatActivity {
                                 startActivity(intent);
 
                             }
+                            else {
+                                Toast.makeText(SignIn.this, "Tài khoản hoặc mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
+                            }
                         }
+
                     });
                 }
             }

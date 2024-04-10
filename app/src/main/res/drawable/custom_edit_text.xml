@@ -9,7 +9,7 @@
         android:left="12dp"
         android:right="12dp"/>
     <stroke
-        android:color="@color/black"
+
         android:width="2px"
         />
 

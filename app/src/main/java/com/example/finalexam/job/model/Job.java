@@ -8,16 +8,17 @@ public class Job implements Serializable {
 
     //Thông tin vắn tắt
     String  company, title, opp, shortAddress, exp, role,category;
+    int quantity;
 
     //Thông tin chi tiết
-    String description,requirement,benefit,address;
+    String description,requirement,benefit,address,time;
     //opp: hình thức tuyển dụng (partime, fulltime, intern)
     double salary;
 
     public Job() {
     }
 
-    public Job(String jobId, String company,String companyLogo, String title, String opp, String shortAddress, String exp, String role, String category, String description, String requirement, String benefit, String address, double salary) {
+    public Job(String jobId, String company,String companyLogo, String title, String opp, String shortAddress, String exp, String role, String category,int quantity, String description, String requirement, String benefit, String address, double salary,String time) {
         this.jobId = jobId;
         this.company = company;
         this.companyLogo=companyLogo;
@@ -27,11 +28,13 @@ public class Job implements Serializable {
         this.exp = exp;
         this.role = role;
         this.category = category;
+        this.quantity=quantity;
         this.description = description;
         this.requirement = requirement;
         this.benefit = benefit;
         this.address = address;
         this.salary = salary;
+        this.time=time;
     }
 
     public String getJobId() {
@@ -144,5 +147,21 @@ public class Job implements Serializable {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

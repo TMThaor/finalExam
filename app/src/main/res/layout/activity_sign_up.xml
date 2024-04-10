@@ -9,7 +9,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="30dp">
+        android:padding="30dp"
+        >
 
         <TextView
             android:id="@+id/lbDangKy"
@@ -17,7 +18,6 @@
             android:layout_height="wrap_content"
             android:text="Đăng ký"
             android:textAllCaps="true"
-            android:textColor="@color/black"
             android:textSize="40dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

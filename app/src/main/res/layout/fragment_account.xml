@@ -2,8 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".mainPage.fragments.AccountFragment">
+    tools:context=".mainPage.fragments.AccountFragment"
+    android:padding="20dp">
     <ImageView
         android:id="@+id/img_user_photo"
         android:layout_width="150dp"
@@ -17,10 +19,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Danh sách công việc đã ứng tuyển"
-        android:editable="false"
         android:textSize="20sp"
         android:padding="16dp"
-        android:background="#CCCCCC"/>
+        />
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:dividerColor="@color/gray"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Trung tâm hỗ trợ"
+        android:textSize="20sp"
+        android:padding="16dp" />
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:dividerColor="@color/gray"/>
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kiểm tra cập nhật"
+        android:textSize="20sp"
+        android:padding="16dp" />
 
     <!-- Button Đăng xuất -->
     <Button

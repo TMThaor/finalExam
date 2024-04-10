@@ -33,8 +33,8 @@
                 android:layout_height="wrap_content"
                 android:text="Việc làm hấp dẫn"
                 android:textStyle="bold"
-                android:textColor="@color/black"
-                android:textSize="20dp"/>
+                android:textSize="20dp"
+                />
             <TextView
                 android:id="@+id/tvMoreJob"
                 android:layout_width="wrap_content"
@@ -62,7 +62,6 @@
             android:layout_height="wrap_content"
             android:text="Công ty hàng đầu"
             android:textStyle="bold"
-            android:textColor="@color/black"
             android:textSize="20dp"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCompany"

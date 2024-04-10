@@ -110,12 +110,12 @@ public class homepageFragment extends Fragment{
 //    private void initJobs() {
 //        DatabaseReference jobsRef = FirebaseDatabase.getInstance().getReference("jobs");
 //        //Demo
-//        Job job1 = new Job("123", "Công ty cổ phần Koffmann","logoKoffmann.png", "Software Engineer", "Full-time", "Ha Noi", "3 years", "Staff","IT", "Description", "null","null","null",5000.0);
-//        Job job2 = new Job("124", "Công ty TNHH Sailin", "logoSailun.png","Quản lý xưởng", "Full-time", "TP. HCM", "2 years", "Manager","Sản xuất", "Description","null","null","null", 6000.0);
-//        Job job3 = new Job("125", "Tập đoàn VinGroup","logoVingroup.jpg", "Project Manager", "Full-time", "Ha Noi", "5 years", "Manager","IT", "Description","null","null","null", 6000.0);
-//        Job job4 = new Job("126", "FPT Software","logoFpt.png", "Software Engineer", "Full-time", "Ha Noi", "3 years", "Staff","IT", "Description","null","null","null", 5000.0);
-//        Job job5 = new Job("127", "Viettel","logoViettel.jpg", "Nhân viên chăm sóc khách hàng", "Part-time", "TP. HCM", "2 years", "Staff","IT", "Description","null","null","null", 4000.0);
-//        Job job6 = new Job("128", "StarBucks","logoStarBucks.png", "Quản lý cửa hàng", "Full-time", "Ha Noi", "5 years", "Manager","IT", "Description","null","null","null", 6000.0);
+//        Job job1 = new Job("123", "Công ty cổ phần Koffmann","logoKoffmann.png", "Software Engineer", "Full-time", "Ha Noi", "3 years", "Staff","IT",5, "Description", "null","null","null",5000.0,"từ thứ 2 đến thứ 7 hàng tuần: 8h00 - 17h00");
+//        Job job2 = new Job("124", "Công ty TNHH Sailin", "logoSailun.png","Quản lý xưởng", "Full-time", "TP. HCM", "2 years", "Manager","Sản xuất",2, "Description","null","null","null", 6000.0,"từ thứ 2 đến thứ 7 hàng tuần: 8h00 - 17h00");
+//        Job job3 = new Job("125", "Tập đoàn VinGroup","logoVingroup.jpg", "Project Manager", "Full-time", "Ha Noi", "5 years", "Manager","IT",1,"Description","null","null","null", 6000.0,"từ thứ 2 đến thứ 7 hàng tuần: 8h00 - 17h00");
+//        Job job4 = new Job("126", "FPT Software","logoFpt.png", "Software Engineer", "Full-time", "Ha Noi", "3 years", "Staff","IT",5, "Description","null","null","null", 5000.0,"từ thứ 2 đến thứ 7 hàng tuần: 8h00 - 17h00");
+//        Job job5 = new Job("127", "Viettel","logoViettel.jpg", "Nhân viên chăm sóc khách hàng", "Part-time", "TP. HCM", "2 years", "Staff","IT", "Description","null","null","null", 4000.0,"từ thứ 2 đến thứ 7 hàng tuần: Sáng từ 8h-12h hoặc chiều từ 13h-17h");
+//        Job job6 = new Job("128", "StarBucks","logoStarBucks.png", "Quản lý cửa hàng", "Full-time", "Ha Noi", "5 years", "Manager","Dịch vụ",1, "Description","null","null","null", 6000.0,"từ thứ 2 đến thứ 7 hàng tuần: 8h00 - 17h00");
 //        jobsRef.child(job1.getJobId()).setValue(job1);
 //        jobsRef.child(job2.getJobId()).setValue(job2);
 //        jobsRef.child(job3.getJobId()).setValue(job3);
