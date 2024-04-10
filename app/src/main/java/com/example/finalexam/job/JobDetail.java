@@ -28,11 +28,12 @@ import com.google.firebase.storage.StorageReference;
 
 public class JobDetail extends AppCompatActivity {
 
+    private String userId;
     private ImageView ivLogoCompany;
     private TextView  jobTitleTextView, jobCompanyTextView, jobOppTextView, jobAddressTextView,
             jobExpTextView,  jobDesTextView, jobSalaryTextView, jobRequirement, jobBenefit, jobShortAddress,
             jobExpTextView1,jobQuantityTextView,jobRoleTextView,jobTimeTextView;
-    private Button applyButton;
+    private Button applyButton, removeButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +56,35 @@ public class JobDetail extends AppCompatActivity {
         jobTimeTextView =findViewById(R.id.job_time_text_view);
 
         applyButton = findViewById(R.id.apply_button);
+        removeButton = findViewById(R.id.remove_button);
+
+        removeButton.setVisibility(View.GONE);
+        userId = MainPage.getId();
+
+        if (userId != null) {
+            Bundle extras = getIntent().getExtras();
+            if (extras != null) {
+                Job job = (Job) extras.get("object_job");
+                String jobId = job.getJobId();
+
+                // Kiểm tra xem người dùng đã apply công việc này chưa
+                DatabaseReference applyJobRef = FirebaseDatabase.getInstance().getReference("ApplyJob").child(userId).child(jobId);
+                applyJobRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            removeButton.setVisibility(View.VISIBLE);
+                            applyButton.setVisibility(View.GONE);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        }
         //Demo
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -88,7 +118,7 @@ public class JobDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Lấy userID từ Intent
-                String userId = MainPage.getId();
+                userId = MainPage.getId();
 
                 if (userId != null) {
                     Bundle extras = getIntent().getExtras();
@@ -96,20 +126,16 @@ public class JobDetail extends AppCompatActivity {
                         Job job=(Job) extras.get("object_job");
                         String jobId = job.getJobId();
 
-                        // Kiểm tra xem người dùng đã apply công việc này chưa
                         DatabaseReference applyJobRef = FirebaseDatabase.getInstance().getReference("ApplyJob").child(userId).child(jobId);
                         applyJobRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if (snapshot.exists()) {
-                                    // Người dùng đã apply công việc này
-                                    Toast.makeText(JobDetail.this, "Bạn đã apply công việc này rồi!", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    // Người dùng chưa apply công việc này, thực hiện lưu thông tin
                                     applyJobRef.setValue(true)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void unused) {
+                                                    removeButton.setVisibility(View.VISIBLE);
+                                                    applyButton.setVisibility(View.GONE);
                                                     Toast.makeText(JobDetail.this, "Ứng tuyển thành công!", Toast.LENGTH_SHORT).show();
                                                 }
                                             })
@@ -120,13 +146,41 @@ public class JobDetail extends AppCompatActivity {
                                                 }
                                             });
                                 }
-                            }
-
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
                                 // Xử lý khi có lỗi xảy ra trong quá trình truy vấn Firebase
                                 Toast.makeText(JobDetail.this, "Đã xảy ra lỗi khi kiểm tra apply job!", Toast.LENGTH_SHORT).show();
                                 Log.e("JobDetail", "Error checking apply job: " + error.getMessage());
+                            }
+                        });
+                    }
+                }
+            }
+        });
+        removeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String userId = MainPage.getId();
+
+                if (userId != null) {
+                    Bundle extras = getIntent().getExtras();
+                    if (extras != null) {
+                        Job job = (Job) extras.get("object_job");
+                        String jobId = job.getJobId();
+
+                        // Truy cập Firebase để xóa bản ghi ứng tuyển
+                        DatabaseReference applyJobRef = FirebaseDatabase.getInstance().getReference("ApplyJob").child(userId).child(jobId);
+                        applyJobRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                removeButton.setVisibility(View.GONE);
+                                applyButton.setVisibility(View.VISIBLE);
+                                Toast.makeText(JobDetail.this, "Hủy ứng tuyển thành công!", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(JobDetail.this, "Đã xảy ra lỗi khi hủy ứng tuyển!", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
