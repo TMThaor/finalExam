@@ -56,7 +56,6 @@ public class CVfragment extends Fragment {
                         public void onClick(View view) {
                             createCVButton.setVisibility(View.GONE);
                             openCVFormFragment();
-
                         }
                     });
                 }

@@ -154,6 +154,7 @@ public class CVFormFragment extends Fragment {
         userId = MainPage.getId();
         DatabaseReference cvRef = FirebaseDatabase.getInstance().getReference().child("CV").child(userId);
         // Lấy thông tin từ các trường EditText và Spinner
+        setUserName(editTextName.getText().toString().replaceAll(" ",""));
         String name = editTextName.getText().toString().trim();
         String role = editTextRole.getText().toString().trim();
         String phone = editTextPhone.getText().toString().trim();
