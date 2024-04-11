@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.bumptech.glide.Glide;
 import com.example.finalexam.R;
+import com.example.finalexam.job.UserExperienceList;
 import com.example.finalexam.mainPage.MainPage;
 import com.example.finalexam.user.model.User;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -43,9 +44,9 @@ public class CVFormFragment extends Fragment {
     private ImageView imgCVPhoto;
     private String photoUid;
     private EditText editTextName, editTextRole, editTextPhone, editTextEmail, editTextAddress, editTextDob,
-            editTextEducation, editTextJobExperiment, editTextDegree, editTextSkills, editGender,
+            editTextEducation, editTextDegree, editTextSkills, editGender,
             editTextCareerGoals, editTextSocialActivities, editTextHobbies, editTextAchievement, editTextMoreInfo;
-    private Button buttonSaveCV;
+    private Button buttonSaveCV,btnExp;
 
 
     @Override
@@ -67,7 +68,7 @@ public class CVFormFragment extends Fragment {
         editTextAddress = view.findViewById(R.id.edit_text_address);
         editTextDob = view.findViewById(R.id.edit_text_dob);
         editTextEducation = view.findViewById(R.id.edit_text_education);
-        editTextJobExperiment = view.findViewById(R.id.edit_text_job_experiment);
+
         editTextDegree = view.findViewById(R.id.edit_text_degree);
         editTextSkills = view.findViewById(R.id.edit_text_skills);
         editTextCareerGoals = view.findViewById(R.id.edit_text_career_goals);
@@ -77,6 +78,7 @@ public class CVFormFragment extends Fragment {
         editTextMoreInfo = view.findViewById(R.id.edit_text_more_info);
         editGender = view.findViewById(R.id.edit_text_gender);
         buttonSaveCV = view.findViewById(R.id.button_save_cv);
+        btnExp=view.findViewById(R.id.btnExpList);
 
         CheckUserHasCV();
         // Xử lý sự kiện khi nhấn vào nút "Save CV"
@@ -101,6 +103,13 @@ public class CVFormFragment extends Fragment {
 
         });
 
+        btnExp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(requireContext(), UserExperienceList.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
@@ -121,7 +130,7 @@ public class CVFormFragment extends Fragment {
 
                     // Hiển thị dữ liệu từ ArrayList<String>
                     editTextEducation.setText(arrayListToString(snapshot.child("education")));
-                    editTextJobExperiment.setText(arrayListToString(snapshot.child("jobExperiment")));
+
                     editTextDegree.setText(arrayListToString(snapshot.child("degree")));
                     editTextSkills.setText(arrayListToString(snapshot.child("skills")));
                     editTextHobbies.setText(arrayListToString(snapshot.child("hobbies")));
@@ -159,7 +168,9 @@ public class CVFormFragment extends Fragment {
 
         // Chia các thông tin thành danh sách chuỗi
         ArrayList<String> educationList = new ArrayList<>(Arrays.asList(editTextEducation.getText().toString().split("\n")));
-        ArrayList<String> jobExperimentList = new ArrayList<>(Arrays.asList(editTextJobExperiment.getText().toString().split("\n")));
+
+        //
+
         ArrayList<String> degreeList = new ArrayList<>(Arrays.asList(editTextDegree.getText().toString().split("\n")));
         ArrayList<String> skillsList = new ArrayList<>(Arrays.asList(editTextSkills.getText().toString().split("\n")));
         ArrayList<String> hobbiesList = new ArrayList<>(Arrays.asList(editTextHobbies.getText().toString().split("\n")));
@@ -170,7 +181,7 @@ public class CVFormFragment extends Fragment {
 
         // Validate đơn giản
         if (name.isEmpty() || role.isEmpty() || phone.isEmpty() || email.isEmpty() || address.isEmpty() || dob.isEmpty() ||
-                educationList.isEmpty() || jobExperimentList.isEmpty() || degreeList.isEmpty() || skillsList.isEmpty() || careerGoals.isEmpty() ||
+                educationList.isEmpty() || degreeList.isEmpty() || skillsList.isEmpty() || careerGoals.isEmpty() ||
                 socialActivities.isEmpty() || hobbiesList.isEmpty() || achievementList.isEmpty() || moreInfo.isEmpty()) {
             Toast.makeText(requireContext(), "Vui lòng điền tất cả các trường", Toast.LENGTH_SHORT).show();
             return;
@@ -185,7 +196,7 @@ public class CVFormFragment extends Fragment {
         user.setAddress(address);
         user.setDOB(dob);
         user.setEducation(educationList);
-        user.setJobExperiment(jobExperimentList);
+        //
         user.setDegree(degreeList);
         user.setSkills(skillsList);
         user.setCareerGoals(careerGoals);

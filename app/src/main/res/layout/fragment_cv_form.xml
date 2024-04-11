@@ -150,14 +150,13 @@
             android:layout_height="wrap_content"
             android:text="Kinh nghiệm làm việc"
             android:layout_margin="5dp"/>
-        <EditText
-            android:id="@+id/edit_text_job_experiment"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btnExpList"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            android:background="@drawable/custom_cv_field"
-            android:hint="Có thể nhập nhiều dòng"
-            android:textColorHint="@color/gray"/>
+            android:text="Kinh nghiệm làm việc"
+            android:background="@drawable/custom_button_tron"
+            android:textColor="@color/white"/>
 
         <!-- Degree -->
         <TextView
