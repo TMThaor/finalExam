@@ -209,7 +209,7 @@
                 android:id="@+id/job_requirement_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Requirement: "
+                android:text=""
                 android:textSize="18sp"
                 android:layout_margin="5dp"
                 />
@@ -224,7 +224,7 @@
                 android:id="@+id/job_benefit_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Benefit"
+                android:text=""
                 android:textSize="18sp"
                 android:layout_margin="5dp"
                 />

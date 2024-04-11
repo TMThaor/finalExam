@@ -108,7 +108,11 @@ public class JobDetail extends AppCompatActivity {
             jobQuantityTextView.setText("  Số lượng tuyển: "+job.getQuantity());
             jobRoleTextView.setText("Cấp bậc: "+job.getRole());
             jobDesTextView.setText(job.getDescription());
-            jobRequirement.setText(job.getRequirement());
+            String[] r=job.getRequirement().toString().split("/n");
+            for(String s:r){
+                jobRequirement.append(s);
+                jobRequirement.append("\n");
+            }
             jobBenefit.setText(job.getBenefit());
             jobAddressTextView.setText(job.getAddress());
             jobTimeTextView.setText(job.getTime());
