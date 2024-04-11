@@ -42,10 +42,6 @@ public class CVFormFragment extends Fragment {
     private String userId;
     private ImageView imgCVPhoto;
     private String photoUid;
-    private String userName;
-    private void setUserName(String userName){
-        this.userName = userName;
-    }
     private EditText editTextName, editTextRole, editTextPhone, editTextEmail, editTextAddress, editTextDob,
             editTextEducation, editTextJobExperiment, editTextDegree, editTextSkills, editGender,
             editTextCareerGoals, editTextSocialActivities, editTextHobbies, editTextAchievement, editTextMoreInfo;
@@ -115,7 +111,6 @@ public class CVFormFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    setUserName(snapshot.child("name").getValue(String.class).replaceAll(" ",""));
                     editTextName.setText(snapshot.child("name").getValue(String.class));
                     editTextRole.setText(snapshot.child("role").getValue(String.class));
                     editTextPhone.setText(snapshot.child("phoneNumber").getValue(String.class));
@@ -154,7 +149,6 @@ public class CVFormFragment extends Fragment {
         userId = MainPage.getId();
         DatabaseReference cvRef = FirebaseDatabase.getInstance().getReference().child("CV").child(userId);
         // Lấy thông tin từ các trường EditText và Spinner
-        setUserName(editTextName.getText().toString().replaceAll(" ",""));
         String name = editTextName.getText().toString().trim();
         String role = editTextRole.getText().toString().trim();
         String phone = editTextPhone.getText().toString().trim();
@@ -217,7 +211,7 @@ public class CVFormFragment extends Fragment {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             // Lấy URI của hình ảnh đã chọn
             Uri filePath = data.getData();
-            String fileName = userName + ".png";
+            String fileName = userId + ".png";
             // Tải tập tin lên Firebase Storage
             StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("user_photos/" + fileName);
             storageRef.putFile(filePath)

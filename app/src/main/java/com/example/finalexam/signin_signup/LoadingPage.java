@@ -51,18 +51,12 @@ public class LoadingPage extends AppCompatActivity {
         }
     }
     private void nextActivity() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();//lấy thông tin người dùng hiện tại đã đăng nhập
-        String userId=user.getUid().toString();
         Intent intent; //đối tượng Intent được khởi tạo để chứa thông tin về màn hình chính tiếp theo của ứng dụng.
-        if(user == null) {
+
             //Nếu người dùng chưa đăng nhập, đối tượng Intent sẽ được khởi tạo để chuyển đến LoginActivity (màn hình đăng nhập).
             intent = new Intent(this, SignIn.class);
-        }
-        else {
-            //nếu người dùng đã đăng nhập, đối tượng Intent sẽ được khởi tạo để chuyển đến MainActivity (màn hình chính).
-            intent = new Intent(this, MainPage.class);
-            intent.putExtra("userId",userId);
-        }
+
+
         startActivity(intent);
     }
 }
