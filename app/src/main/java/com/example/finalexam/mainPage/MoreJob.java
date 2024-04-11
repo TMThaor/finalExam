@@ -2,6 +2,8 @@ package com.example.finalexam.mainPage;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,12 +29,14 @@ import java.util.ArrayList;
 public class MoreJob extends AppCompatActivity {
     private JobAdapter jAdapter;
     private RecyclerView jobRecyclerView;
+    private Button btnBack;
     private ArrayList<Job> jobList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more_job);
         jobRecyclerView = findViewById(R.id.rvMoreJob);
+        btnBack=findViewById(R.id.btnBackMoreJob);
         jobRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         jobList = new ArrayList<>();
         initData();
@@ -44,6 +48,13 @@ public class MoreJob extends AppCompatActivity {
             }
         });
         jobRecyclerView.setAdapter(jAdapter);
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
     private void initData() {
         DatabaseReference jobsRef = FirebaseDatabase.getInstance().getReference("jobs");

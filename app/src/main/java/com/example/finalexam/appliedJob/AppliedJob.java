@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.finalexam.R;
@@ -29,12 +31,14 @@ public class AppliedJob extends AppCompatActivity implements AppliedJobAdapter.O
 
     private AppliedJobAdapter appliedJobAdapter;
     private List<Job> appliedJobs;
+    Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_applied_job);
         recyclerView = findViewById(R.id.recycler_view);
+        btnBack=findViewById(R.id.btnBackAppliedJob);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         userID = MainPage.getId();
         if (userID != null) {
@@ -78,6 +82,12 @@ public class AppliedJob extends AppCompatActivity implements AppliedJobAdapter.O
                 }
             });
         }
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     public void onAppliedJobClick(Job appliedjob) {
