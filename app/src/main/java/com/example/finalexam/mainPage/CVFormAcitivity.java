@@ -1,28 +1,34 @@
-package com.example.finalexam.mainPage.fragments;
+package com.example.finalexam.mainPage;
 
+import static android.app.ProgressDialog.show;
+
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentManager;
 
 import com.bumptech.glide.Glide;
 import com.example.finalexam.R;
 import com.example.finalexam.job.UserExperienceList;
 import com.example.finalexam.job.model.Experience;
-import com.example.finalexam.job.model.Job;
-import com.example.finalexam.mainPage.MainPage;
 import com.example.finalexam.user.model.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -37,10 +43,8 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.UUID;
 
-public class CVFormFragment extends Fragment {
+public class CVFormAcitivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     public static final int RESULT_OK = -1;
     private String userId;
@@ -50,40 +54,32 @@ public class CVFormFragment extends Fragment {
             editTextEducation, editTextDegree, editTextSkills, editGender,
             editTextCareerGoals, editTextSocialActivities, editTextHobbies, editTextAchievement, editTextMoreInfo;
     private Button buttonSaveCV,btnExp;
-    private ArrayList<Experience> lstExperience;
-
-
+    public ArrayList<Experience> lstExperience;
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_cv_form, container, false);
-
-        // Ánh xạ các view từ layout
+        userId=getIntent().getExtras().get("userId").toString();
+        setContentView(R.layout.activity_cvform_acitivity);
         lstExperience=new ArrayList<>();
-        imgCVPhoto = view.findViewById(R.id.img_cv_photo);
-        editTextName = view.findViewById(R.id.edit_text_name);
-        editTextRole = view.findViewById(R.id.edit_text_role);
-        editTextPhone = view.findViewById(R.id.edit_text_phone);
-        editTextEmail = view.findViewById(R.id.edit_text_email);
-        editTextAddress = view.findViewById(R.id.edit_text_address);
-        editTextDob = view.findViewById(R.id.edit_text_dob);
-        editTextEducation = view.findViewById(R.id.edit_text_education);
+        imgCVPhoto = findViewById(R.id.img_cv_photo);
+        editTextName = findViewById(R.id.edit_text_name);
+        editTextRole = findViewById(R.id.edit_text_role);
+        editTextPhone = findViewById(R.id.edit_text_phone);
+        editTextEmail = findViewById(R.id.edit_text_email);
+        editTextAddress = findViewById(R.id.edit_text_address);
+        editTextDob = findViewById(R.id.edit_text_dob);
+        editTextEducation = findViewById(R.id.edit_text_education);
 
-        editTextDegree = view.findViewById(R.id.edit_text_degree);
-        editTextSkills = view.findViewById(R.id.edit_text_skills);
-        editTextCareerGoals = view.findViewById(R.id.edit_text_career_goals);
-        editTextSocialActivities = view.findViewById(R.id.edit_text_social_activities);
-        editTextHobbies = view.findViewById(R.id.edit_text_hobbies);
-        editTextAchievement = view.findViewById(R.id.edit_text_achievement);
-        editTextMoreInfo = view.findViewById(R.id.edit_text_more_info);
-        editGender = view.findViewById(R.id.edit_text_gender);
-        buttonSaveCV = view.findViewById(R.id.button_save_cv);
-        btnExp=view.findViewById(R.id.btnExpList);
+        editTextDegree = findViewById(R.id.edit_text_degree);
+        editTextSkills = findViewById(R.id.edit_text_skills);
+        editTextCareerGoals = findViewById(R.id.edit_text_career_goals);
+        editTextSocialActivities = findViewById(R.id.edit_text_social_activities);
+        editTextHobbies = findViewById(R.id.edit_text_hobbies);
+        editTextAchievement = findViewById(R.id.edit_text_achievement);
+        editTextMoreInfo = findViewById(R.id.edit_text_more_info);
+        editGender = findViewById(R.id.edit_text_gender);
+        buttonSaveCV =findViewById(R.id.button_save_cv);
+        btnExp=findViewById(R.id.btnExpList);
 
         CheckUserHasCV();
         // Xử lý sự kiện khi nhấn vào nút "Save CV"
@@ -92,8 +88,7 @@ public class CVFormFragment extends Fragment {
             public void onClick(View v) {
                 saveCVToFirebase();
                 //Khi lưu xong sẽ quay lại fragment CV chính
-                FragmentManager fragmentManager = getParentFragmentManager();
-                fragmentManager.popBackStack();
+                finish();
             }
         });
 
@@ -107,22 +102,40 @@ public class CVFormFragment extends Fragment {
             }
 
         });
+        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            // Xử lý kết quả trả về ở đây
+                            Intent data = result.getData();
+                            lstExperience = (ArrayList<Experience>) data.getSerializableExtra("myObject");
+                            // Xử lý đối tượng trả về ở đây
+                        }
+                    }
+                });
 
         btnExp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(requireContext(), UserExperienceList.class);
+//                Intent intent =new Intent(CVFormAcitivity.this, UserExperienceList.class);
                 Bundle bundle=new Bundle();
-                bundle.putSerializable("listExp",lstExperience);
+//                bundle.putSerializable("listExp",lstExperience);
+                bundle.putString("userId",userId);
+
+
+// Khởi tạo Intent và bắt đầu Activity muốn kết thúc và trả về kết quả
+                Intent intent = new Intent(CVFormAcitivity.this, UserExperienceList.class);
                 intent.putExtras(bundle);
-                startActivity(intent);
+                activityResultLauncher.launch(intent);
+
+//                startActivity(intent);
             }
         });
-        return view;
-    }
 
+    }
     private void CheckUserHasCV() {
-        userId = MainPage.getId();
         DatabaseReference cvRef = FirebaseDatabase.getInstance().getReference().child("CV").child(userId);
         cvRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -160,7 +173,7 @@ public class CVFormFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 // Xử lý khi có lỗi xảy ra
-                Toast.makeText(getActivity(), "Failed to retrieve CV data", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getParent(), "Failed to retrieve CV data", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -184,9 +197,6 @@ public class CVFormFragment extends Fragment {
         //
 
 
-
-
-
         ArrayList<String> degreeList = new ArrayList<>(Arrays.asList(editTextDegree.getText().toString().split("\n")));
         ArrayList<String> skillsList = new ArrayList<>(Arrays.asList(editTextSkills.getText().toString().split("\n")));
         ArrayList<String> hobbiesList = new ArrayList<>(Arrays.asList(editTextHobbies.getText().toString().split("\n")));
@@ -199,7 +209,7 @@ public class CVFormFragment extends Fragment {
         if (name.isEmpty() || role.isEmpty() || phone.isEmpty() || email.isEmpty() || address.isEmpty() || dob.isEmpty() ||
                 educationList.isEmpty() || degreeList.isEmpty() || skillsList.isEmpty() || careerGoals.isEmpty() ||
                 socialActivities.isEmpty() || hobbiesList.isEmpty() || achievementList.isEmpty() || moreInfo.isEmpty()) {
-            Toast.makeText(requireContext(), "Vui lòng điền tất cả các trường", Toast.LENGTH_SHORT).show();
+            Toast.makeText(CVFormAcitivity.this, "Vui lòng điền tất cả các trường", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -213,6 +223,7 @@ public class CVFormFragment extends Fragment {
         user.setDOB(dob);
         user.setEducation(educationList);
         //
+        user.setJobExperiment(lstExperience);
         user.setDegree(degreeList);
         user.setSkills(skillsList);
         user.setCareerGoals(careerGoals);
@@ -229,7 +240,7 @@ public class CVFormFragment extends Fragment {
         cvRef.setValue(user);
 
         // Hiển thị thông báo lưu thành công
-        Toast.makeText(getActivity(), "CV saved successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(CVFormAcitivity.this, "CV saved successfully", Toast.LENGTH_SHORT).show();
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -253,7 +264,7 @@ public class CVFormFragment extends Fragment {
                                     photoUid = fileName;
 
                                     // Hiển thị ảnh đã chọn trong imgPhoto
-                                    Glide.with(requireContext()).load(photoUrl).into(imgCVPhoto);
+                                    Glide.with(CVFormAcitivity.this).load(photoUrl).into(imgCVPhoto);
                                 }
                             });
                         }
@@ -262,7 +273,7 @@ public class CVFormFragment extends Fragment {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             // Xử lý khi tải lên không thành công
-                            Toast.makeText(requireContext(), "Upload failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CVFormAcitivity.this, "Upload failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
         }
@@ -284,9 +295,8 @@ public class CVFormFragment extends Fragment {
         cvPhoto.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Glide.with(requireContext()).load(uri).into(imgCVPhoto);
+                Glide.with(CVFormAcitivity.this).load(uri).into(imgCVPhoto);
             }
         });
     }
-
 }

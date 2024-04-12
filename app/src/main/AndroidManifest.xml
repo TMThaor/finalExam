@@ -13,6 +13,9 @@
         android:theme="@style/Theme.FinalExam"
         tools:targetApi="31">
         <activity
+            android:name=".mainPage.CVFormAcitivity"
+            android:exported="false" />
+        <activity
             android:name=".job.FormAddExperience"
             android:exported="false" />
         <activity

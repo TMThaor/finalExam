@@ -1,5 +1,7 @@
 package com.example.finalexam.user.model;
 
+import com.example.finalexam.job.model.Experience;
+
 import java.util.ArrayList;
 
 public class User {
@@ -9,7 +11,7 @@ public class User {
     private String name,role,phoneNumber,email,address,gender,DOB;
 
     private ArrayList<String> education;
-    private ArrayList<String> jobExperiment;
+    private ArrayList<Experience> jobExperiment;
     private ArrayList<String> degree;
     private ArrayList<String> skills;
     private String careerGoals;
@@ -43,7 +45,7 @@ public class User {
     }
 
     public User(String userId, String name, String role, String phoneNumber, String email, String address,
-                String gender, String DOB, ArrayList<String> education, ArrayList<String> jobExperiment,
+                String gender, String DOB, ArrayList<String> education, ArrayList<Experience> jobExperiment,
                 ArrayList<String> degree, ArrayList<String> skills, String careerGoals, String socialActivities,
                 ArrayList<String> hobbies, ArrayList<String> achievement, String moreInfo, String photoUid)
     {
@@ -139,11 +141,11 @@ public class User {
         this.education = education;
     }
 
-    public ArrayList<String> getJobExperiment() {
+    public ArrayList<Experience> getJobExperiment() {
         return jobExperiment;
     }
 
-    public void setJobExperiment(ArrayList<String> jobExperiment) {
+    public void setJobExperiment(ArrayList<Experience> jobExperiment) {
         this.jobExperiment = jobExperiment;
     }
 

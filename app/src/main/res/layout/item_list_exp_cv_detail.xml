@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginLeft="15dp">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/square"
+            android:layout_marginRight="10dp"
+            android:textSize="18dp"/>
+        <TextView
+            android:id="@+id/listExpCVDetailCompanyName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tên công ty"
+            android:layout_marginRight="10dp"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="|"
+            android:textSize="16dp"/>
+        <TextView
+            android:id="@+id/listExpCVDetailStartDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="start date"
+            android:layout_marginLeft="10dp"
+            android:textSize="14dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:textSize="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:id="@+id/listExpCVDetailEndDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="end date"
+            android:textSize="14dp"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/listExpCVDetailRole"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        android:text="Vị trí"
+        android:textStyle="bold"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="20dp"/>
+    <TextView
+        android:id="@+id/listExpCVDetailDes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="Mô tả công việc"
+        android:textSize="14dp"/>
+
+</LinearLayout>

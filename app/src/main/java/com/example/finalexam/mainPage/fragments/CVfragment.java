@@ -1,17 +1,21 @@
 package com.example.finalexam.mainPage.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.finalexam.mainPage.CVFormAcitivity;
 import com.example.finalexam.mainPage.fragments.CVFormFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.finalexam.R;
 import com.example.finalexam.mainPage.MainPage;
@@ -74,15 +78,16 @@ public class CVfragment extends Fragment {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         CVDetailFragment cvDetailFragment = new CVDetailFragment();
         fragmentTransaction.replace(R.id.fragment_container, cvDetailFragment);
-        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
     private void openCVFormFragment() {
-        FragmentManager fragmentManager = getParentFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        CVFormFragment cvFormFragment = new CVFormFragment();
-        fragmentTransaction.replace(R.id.fragment_container, cvFormFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+//        FragmentManager fragmentManager = getParentFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        CVFormFragment cvFormFragment = new CVFormFragment();
+//        fragmentTransaction.replace(R.id.fragment_container, cvFormFragment);
+//        fragmentTransaction.commit();
+        Intent intent=new Intent(requireContext(), CVFormAcitivity.class);
+        startActivity(intent);
     }
+
 }

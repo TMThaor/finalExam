@@ -1,5 +1,6 @@
 package com.example.finalexam.mainPage.fragments;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,10 +15,18 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.finalexam.R;
+import com.example.finalexam.job.adapter.ExperienceAdapter;
+import com.example.finalexam.job.adapter.ExperienceCVDetailAdapter;
+import com.example.finalexam.job.model.Experience;
+import com.example.finalexam.mainPage.CVFormAcitivity;
 import com.example.finalexam.mainPage.MainPage;
+import com.example.finalexam.my_interface.IRemoveUserExp;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -29,13 +38,18 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
+
 public class CVDetailFragment extends Fragment {
     private String userId;
 
     private ImageView imgCVPhoto;
     private TextView textViewName,textViewRole, textViewPhone, textViewEmail,textViewAddress, textViewGender, textViewDob, textViewEducation,
-            textViewJobExp, textViewDegree, textViewSkills, textViewCareerGoals, textViewSocialActivities, textViewHobbies, textViewAchievement, textViewMoreInfo;
+             textViewDegree, textViewSkills, textViewCareerGoals, textViewSocialActivities, textViewHobbies, textViewAchievement, textViewMoreInfo;
     private FloatingActionButton EditCV;
+    RecyclerView rcvExp;
+    ExperienceCVDetailAdapter mAdapter;
+    ArrayList<Experience> listExp;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,7 +63,7 @@ public class CVDetailFragment extends Fragment {
         textViewGender = view.findViewById(R.id.text_view_gender);
         textViewDob = view.findViewById(R.id.text_view_dob);
         textViewEducation = view.findViewById(R.id.text_view_education);
-        textViewJobExp = view.findViewById(R.id.text_view_job_exp);
+        rcvExp = view.findViewById(R.id.rcvExp);
         textViewDegree = view.findViewById(R.id.text_view_degree);
         textViewSkills = view.findViewById(R.id.text_view_skills);
         textViewCareerGoals = view.findViewById(R.id.text_view_career_goals);
@@ -59,6 +73,10 @@ public class CVDetailFragment extends Fragment {
         textViewMoreInfo = view.findViewById(R.id.text_view_more_info);
         EditCV = view.findViewById(R.id.fab_edit_cv);
         userId = MainPage.getId();
+
+        listExp =new ArrayList<>();
+
+
         DatabaseReference cvRef = FirebaseDatabase.getInstance().getReference().child("CV").child(userId);
         cvRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -74,11 +92,12 @@ public class CVDetailFragment extends Fragment {
 
                     // Hiển thị dữ liệu từ ArrayList<String>
                     textViewEducation.setText(arrayListToString(snapshot.child("education")));
-                    textViewJobExp.setText(arrayListToString(snapshot.child("jobExperiment")));
                     textViewDegree.setText(arrayListToString(snapshot.child("degree")));
                     textViewSkills.setText(arrayListToString(snapshot.child("skills")));
                     textViewHobbies.setText(arrayListToString(snapshot.child("hobbies")));
                     textViewAchievement.setText(arrayListToString(snapshot.child("achievement")));
+
+                    initDataForJobExp(snapshot.child("jobExperiment"));
 
                     textViewCareerGoals.setText(snapshot.child("careerGoals").getValue(String.class));
                     textViewSocialActivities.setText(snapshot.child("socialActivities").getValue(String.class));
@@ -99,9 +118,23 @@ public class CVDetailFragment extends Fragment {
                 openEditCVFormFragment();
             }
         });
+
+        rcvExp.setLayoutManager(new GridLayoutManager(requireContext(),1 ));
+        mAdapter=new ExperienceCVDetailAdapter(listExp);
+        rcvExp.setAdapter(mAdapter);
         return view;
     }
 
+    private void initDataForJobExp(DataSnapshot snapshot){
+        listExp=new ArrayList<>();
+        for(DataSnapshot s:snapshot.getChildren()){
+            Experience e=new Experience();
+            e=s.getValue(Experience.class);
+            e.setExpId(s.getKey());
+            listExp.add(e);
+        }
+        mAdapter.setData(listExp);
+    }
     // Phương thức chuyển đổi ArrayList<String> thành String
     private String arrayListToString(DataSnapshot dataSnapshot) {
         StringBuilder result = new StringBuilder();
@@ -111,14 +144,19 @@ public class CVDetailFragment extends Fragment {
         return result.toString();
     }
     private void openEditCVFormFragment() {
-        CVFormFragment cvFormFragment = new CVFormFragment();
-
-        // Sử dụng FragmentManager để thêm CVFormFragment vào back stack
-        FragmentManager fragmentManager = getParentFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, cvFormFragment)
-                .addToBackStack(null)
-                .commit();
+//        CVFormFragment cvFormFragment = new CVFormFragment();
+//
+//        // Sử dụng FragmentManager để thêm CVFormFragment vào back stack
+//        FragmentManager fragmentManager = getParentFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .replace(R.id.fragment_container, cvFormFragment)
+//                .addToBackStack(null)
+//                .commit();
+        FragmentManager fragmentManager=getParentFragmentManager();
+        fragmentManager.popBackStack();
+        Intent intent =new Intent(requireContext(), CVFormAcitivity.class);
+        intent.putExtra("userId",userId);
+        startActivity(intent);
     }
     private void loadPhotoImage(String photoUid){
         if(TextUtils.isEmpty(photoUid)){

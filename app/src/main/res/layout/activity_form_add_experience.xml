@@ -23,7 +23,7 @@
         android:text="Tên công ty"/>
 
     <EditText
-        android:id="@+id/tvExpNameCompany"
+        android:id="@+id/edtExpNameCompany"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_cv_field" />
@@ -35,7 +35,7 @@
         android:text="Vị trí"/>
 
     <EditText
-        android:id="@+id/tvExpRole"
+        android:id="@+id/edtExpRole"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_cv_field" />
@@ -44,13 +44,32 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Thời gian"/>
+        android:text="Thời gian bắt đầu"/>
 
-    <EditText
-        android:id="@+id/tvExpDate"
+    <Button
+        android:id="@+id/startDate"
+        style="?android:spinnerStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/custom_cv_field" />
+        android:text="JAN 01 2024"
+        android:textColor="@color/black"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thời gian kết thúc"/>
+
+    <Button
+        android:id="@+id/endDate"
+        style="?android:spinnerStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="JAN 01 2024"
+        android:textColor="@color/black"
+        android:textSize="16dp" />
+
+
 
 
     <TextView
@@ -59,7 +78,7 @@
         android:text="Mô tả công việc"/>
 
     <EditText
-        android:id="@+id/tvExpDes"
+        android:id="@+id/edtExpDes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_cv_field"

@@ -55,6 +55,7 @@ public class MainPage extends AppCompatActivity {
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.displayPlace,fragment);
+        fragmentTransaction.addToBackStack(fragment.getTag());
         fragmentTransaction.commit();
     }
     private void addFragment(Fragment fragment){

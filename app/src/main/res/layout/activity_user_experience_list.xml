@@ -1,33 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".job.UserExperienceList"
-    android:orientation="vertical"
     android:padding="15dp">
 
 
-    <Button
-        android:id="@+id/btnBackMoreJob"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/back"
-        android:layout_marginBottom="10dp"/>
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="15dp">
+
+        <Button
+            android:id="@+id/btnBackExpList"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/back" />
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvExperience"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddMoreExp"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:layout_editor_absoluteX="15dp" />
+
     <Button
+        android:id="@+id/btnAddMoreExp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/custom_button_tron"
         android:text="Thêm kinh nghiệm làm việc"
         android:textColor="@color/white"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/custom_button_tron"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="15dp" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
