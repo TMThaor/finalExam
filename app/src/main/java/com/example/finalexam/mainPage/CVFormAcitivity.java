@@ -111,7 +111,6 @@ public class CVFormAcitivity extends AppCompatActivity {
                             // Xử lý kết quả trả về ở đây
                             Intent data = result.getData();
                             lstExperience = (ArrayList<Experience>) data.getSerializableExtra("myObject");
-                            // Xử lý đối tượng trả về ở đây
                         }
                     }
                 });
