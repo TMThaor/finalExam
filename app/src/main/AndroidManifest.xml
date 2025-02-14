@@ -19,7 +19,7 @@
             android:name=".job.FormAddExperience"
             android:exported="false" />
         <activity
-            android:name=".job.UserExperienceList"
+            android:name=".user.model.UserExperienceList"
             android:exported="false" />
         <activity
             android:name=".signin_signup.LoadingPage"

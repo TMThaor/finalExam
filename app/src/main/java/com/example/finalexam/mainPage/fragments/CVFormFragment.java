@@ -19,9 +19,8 @@ import androidx.fragment.app.FragmentManager;
 
 import com.bumptech.glide.Glide;
 import com.example.finalexam.R;
-import com.example.finalexam.job.UserExperienceList;
+import com.example.finalexam.user.model.UserExperienceList;
 import com.example.finalexam.job.model.Experience;
-import com.example.finalexam.job.model.Job;
 import com.example.finalexam.mainPage.MainPage;
 import com.example.finalexam.user.model.User;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -37,8 +36,6 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.UUID;
 
 public class CVFormFragment extends Fragment {
     private static final int PICK_IMAGE_REQUEST = 1;

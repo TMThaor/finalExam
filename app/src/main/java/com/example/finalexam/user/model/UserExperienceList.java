@@ -1,23 +1,18 @@
-package com.example.finalexam.job;
+package com.example.finalexam.user.model;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.finalexam.Company.model.Company;
 import com.example.finalexam.R;
+import com.example.finalexam.job.FormAddExperience;
 import com.example.finalexam.job.adapter.ExperienceAdapter;
 import com.example.finalexam.job.model.Experience;
 import com.example.finalexam.my_interface.IRemoveUserExp;
@@ -69,7 +64,7 @@ public class UserExperienceList extends AppCompatActivity {
         btnAddExp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(UserExperienceList.this,FormAddExperience.class);
+                Intent intent=new Intent(UserExperienceList.this, FormAddExperience.class);
                 intent.putExtra("key",listExp.size());
                 startActivity(intent);
             }
